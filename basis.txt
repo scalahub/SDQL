@@ -1,0 +1,64 @@
+reducedBasis = \
+       ContractDefinition           (id:Int[statementID], startChar:Int, numChars:Int, fullyImplemented:Boolean, linearizedBaseContracts:Int, isLibrary:Boolean, name:String);\
+       Return                       (id:Int[statementID], startChar:Int, numChars:Int);\
+       FunctionDefinition           (id:Int[statementID], startChar:Int, numChars:Int, constant:Boolean, payable:Boolean, visibility:String, name:String);\
+       IfStatement                  (id:Int[statementID], startChar:Int, numChars:Int);\
+       UserDefinedTypeName          (id:Int[statementID], startChar:Int, numChars:Int, name:String);\
+       FunctionCall                 (id:Int[statementID], startChar:Int, numChars:Int, typeconversion:Boolean, type:String);\
+       IndexAccess                  (id:Int[statementID], startChar:Int, numChars:Int, type:String);\
+       Literal                      (id:Int[statementID], startChar:Int, numChars:Int, hexvalue:String, subdenomination:String, token:String, type:String, value:String);\
+       UnaryOperation               (id:Int[statementID], startChar:Int, numChars:Int, prefix:Boolean, type:String, operator:String);\
+       Mapping                      (id:Int[statementID], startChar:Int, numChars:Int);\
+       WhileStatement               (id:Int[statementID], startChar:Int, numChars:Int);\
+       StructDefinition             (id:Int[statementID], startChar:Int, numChars:Int, name:String);\
+       ParameterList                (id:Int[statementID], startChar:Int, numChars:Int);\
+       Break                        (id:Int[statementID], startChar:Int, numChars:Int);\
+       PragmaDirective            ! (id:Int[statementID], startChar:Int, numChars:Int, literals:String);\
+       VariableDeclaration          (id:Int[statementID], startChar:Int, numChars:Int, name:String, type:String);\
+       ElementaryTypeName           (id:Int[statementID], startChar:Int, numChars:Int, name:String);\
+       PlaceholderStatement         (id:Int[statementID], startChar:Int, numChars:Int);\
+       ForStatement                 (id:Int[statementID], startChar:Int, numChars:Int);\
+       Identifier                   (id:Int[statementID], startChar:Int, numChars:Int, type:String, value:String);\
+       ModifierDefinition           (id:Int[statementID], startChar:Int, numChars:Int, name:String);\
+       Assignment                   (id:Int[statementID], startChar:Int, numChars:Int, type:String, operator:String);\
+       DoWhileStatement             (id:Int[statementID], startChar:Int, numChars:Int);\
+       ModifierInvocation           (id:Int[statementID], startChar:Int, numChars:Int);\
+       Block                        (id:Int[statementID], startChar:Int, numChars:Int);\
+       EventDefinition              (id:Int[statementID], startChar:Int, numChars:Int, name:String);\
+       BinaryOperation              (id:Int[statementID], startChar:Int, numChars:Int, type:String, operator:String);\
+       Continue                     (id:Int[statementID], startChar:Int, numChars:Int);\
+       Throw                        (id:Int[statementID], startChar:Int, numChars:Int);\
+       ExpressionStatement          (id:Int[statementID], startChar:Int, numChars:Int);\
+       MemberAccess                 (id:Int[statementID], startChar:Int, numChars:Int, membername:String, type:String);\
+       VariableDeclarationStatement (id:Int[statementID], startChar:Int, numChars:Int);\
+       UsingForDirective            (id:Int[statementID], startChar:Int, numChars:Int);\
+       ElementaryTypeNameExpression (id:Int[statementID], startChar:Int, numChars:Int, type:String, value:String);\
+       ArrayTypeName                (id:Int[statementID], startChar:Int, numChars:Int);\
+       InheritanceSpecifier         (id:Int[statementID], startChar:Int, numChars:Int);\
+       TupleExpression              (id:Int[statementID], startChar:Int, numChars:Int);\
+       NewExpression                (id:Int[statementID], startChar:Int, numChars:Int, type:String);\
+       EnumDefinition               (id:Int[statementID], startChar:Int, numChars:Int, name:String);\
+       EnumValue                    (id:Int[statementID], startChar:Int, numChars:Int, name:String);\
+       Parent                       (parent:Int{statementID}, child:Int{statementID});\
+       Pred                         (pred:Int{statementID}, succ:Int{statementID});\
+       LastChild                    (parent:Int{statementID}, child:Int{statementID});\
+       FirstChild                   (parent:Int{statementID}, child:Int{statementID});\
+       Src                          (id:Int[statementID], startChar:Int, numChars:Int, text:String);\
+       NumChildren                  (id:Int[statementID], value:Int);\
+       NumDescendents               (id:Int[statementID], value:Int);\
+
+extendedBasis = \
+       Flow                         (src:Int{statementID}, dest:Int{statementID});\
+       Nop                          (id :Int[statementID]);\
+       FlowAcross                   (src:Int{statementID}, dest:Int{statementID});\
+       FunctionCode                 (funcID:Int[functionID], id:Int[statementID]);\
+       SecondChild                  (parent:Int{statementID}, child:Int{statementID});\
+       FuncParamDef                 (stmt:Int{statementID}, params:Int{statementID});\
+       FuncRetDef                   (stmt:Int{statementID}, returns:Int{statementID});\
+       FuncBody                     (stmt:Int{statementID}, body:Int{statementID});\
+       Func                         (funcID:Int[functionID], id:Int[statementID]);\
+       Ancestor                     (parent:Int{statementID}, child:Int{statementID});\
+       Invoke                       (id :Int[statementID], objType:String, instanceName:String, methodName:String, retType:String);\
+       Assign                       (id :Int[statementID], variableName:String, variableType:String, rhsType:String, rhsValue:String);\
+       InLoop                       (stmt:Int{statementID});\
+        

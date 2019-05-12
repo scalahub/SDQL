@@ -1,0 +1,12 @@
+*.iml
+*/target/
+**/*.bak
+**/target
+*/branches/
+.DS_Store
+/.classpath
+/.project
+/.settings
+/lib
+.idea
+

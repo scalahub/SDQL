@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+    <JSON>
+      <children>
+        <src>0:23:-1</src>
+        <name>PragmaDirective</name>
+        <attributes>
+          <literals>solidity</literals>
+          <literals>^</literals>
+          <literals>0.4</literals>
+          <literals>.9</literals>
+        </attributes>
+        <id>1</id>
+      </children>
+      <children>
+        <src>24:39:-1</src>
+        <name>ContractDefinition</name>
+        <attributes>
+          <fullyImplemented>true</fullyImplemented>
+          <linearizedBaseContracts>2</linearizedBaseContracts>
+          <isLibrary>false</isLibrary>
+          <name>mortal</name>
+        </attributes>
+        <id>2</id>
+      </children>
+      <name>SourceUnit</name>
+    </JSON>

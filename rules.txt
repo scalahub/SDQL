@@ -1,0 +1,263 @@
+// declarations
+Declaration(?x, ?variableName, ?userDefinedType, ?variableType) :- 
+              FunctionCode(?f, ?x), 
+              VariableDeclarationStatement(?x, ?startChar1, ?numChar1), 
+                VariableDeclaration(?y, ?startChar2, ?numChar2, ?variableName, ?variableType),
+              UserDefinedTypeName(?z, ?startChar3, ?numChar3, ?userDefinedType),
+              Parent(?x, ?y).
+
+Declaration(?x, ?variableName, ?elementaryType, ?variableType) :- 
+              FunctionCode(?f, ?x), 
+              VariableDeclarationStatement(?x, ?startChar1, ?numChar1), 
+              VariableDeclaration(?y, ?startChar2, ?numChar2, ?variableName, ?variableType),
+              ElementaryTypeName(?z, ?startChar3, ?numChar3, ?elementaryType),
+              Parent(?x, ?y).
+
+Assign(?x, ?variableName, ?elementaryType, ?literalType, ?literalValue) :- 
+	      Declaration(?x, ?variableName, ?elementaryType, ?variableType), 
+              Literal(?y, ?startChar1, ?numChar1, ?hex, ?subden, ?token, ?literalType, ?literalValue),
+              Parent(?x, ?y).
+              
+Assign(?x, ?identifierValue, ?variableType, ?identifierType, ?identifierValue) :-
+              FunctionCode(?f, ?x), 
+              Parent(?x, ?y),
+              Assignment(?y, ?startChar1, ?numChar1, ?variableType, ?operator),
+              Identifier(?z, ?startChar2, ?numChar2, ?identifierType, ?identifierValue),
+              Parent(?y, ?z).
+              
+Nop(?x) :- ExpressionStatement(?x, ?startChar, ?numChar).
+Nop(?x) :- Identifier(?x, ?startChar, ?numChars, ?type, ?value).
+Nop(?x) :- Literal(?x, ?startChar, ?numChars, ?hexvalue, ?subdenomination, ?token, ?type, ?value).
+Nop(?x) :- BinaryOperation(?x, ?startChar, ?numChar, ?type, ?operator).
+Nop(?x) :- UnaryOperation(?x, ?startChar, ?numChar, ?prefix, ?type, ?operator).
+Nop(?x) :- Block(?x, ?startChar, ?numChar).
+Nop(?x) :- UserDefinedTypeName(?x, ?startChar, ?numChar, ?name).
+Nop(?x) :- IfStatement(?x, ?startChar, ?numChar).
+Nop(?x) :- WhileStatement(?x, ?startChar, ?numChar).
+Nop(?x) :- DoWhileStatement(?x, ?startChar, ?numChar).
+Nop(?x) :- MemberAccess(?x, ?startChar, ?numChars, ?membername, ?type).
+Nop(?x) :- BreakStmt(?x).
+
+// loops
+
+FirstChildAncestor(?ancestor, ?descendent) :- Ancestor(?x, ?descendent), FirstChild(?ancestor, ?x).
+
+InLoop(?x) :- WhileStatement(?y, ?startChar, ?numChars), Ancestor(?y, ?x).
+InLoop(?x) :- ForStatement(?y, ?startChar, ?numChars), Ancestor(?y, ?x), ! FirstChildAncestor(?y, ?x).
+
+
+//~ ---- {"startChar":583,"Src":"i += 5","NODE":"ExpressionStatement","id":77,"numChars":6}
+//~ ----- {"startChar":583,"Src":"i += 5","NODE":"Assignment","id":76,"type":"uint256","numChars":6,"operator":"+="}
+//~ ------ {"startChar":583,"Src":"i","NODE":"Identifier","id":74,"type":"uint256","numChars":1,"value":"i"}
+//~ ------ {"subdenomination":"null","startChar":588,"Src":"5","NODE":"Literal","hexvalue":"35","id":75,"type":"int_const 5","numChars":1,"value":"5","token":"null"}
+
+//~ ---- {"startChar":654,"Src":"i = i + 4","NODE":"ExpressionStatement","id":94,"numChars":9}
+//~ ----- {"startChar":654,"Src":"i = i + 4","NODE":"Assignment","id":93,"type":"uint256","numChars":9,"operator":"="}
+//~ ------ {"startChar":654,"Src":"i","NODE":"Identifier","id":89,"type":"uint256","numChars":1,"value":"i"}
+//~ ------ {"startChar":658,"Src":"i + 4","NODE":"BinaryOperation","id":92,"type":"uint256","numChars":5,"operator":"+"}
+//~ ------- {"startChar":658,"Src":"i","NODE":"Identifier","id":90,"type":"uint256","numChars":1,"value":"i"}
+//~ ------- {"subdenomination":"null","startChar":662,"Src":"4","NODE":"Literal","hexvalue":"34","id":91,"type":"int_const 4","numChars":1,"value":"4","token":"null"}
+
+//~ ---- {"startChar":666,"Src":"i = j + 6","NODE":"ExpressionStatement","id":100,"numChars":9}
+//~ ----- {"startChar":666,"Src":"i = j + 6","NODE":"Assignment","id":99,"type":"uint256","numChars":9,"operator":"="}
+//~ ------ {"startChar":666,"Src":"i","NODE":"Identifier","id":95,"type":"uint256","numChars":1,"value":"i"}
+//~ ------ {"startChar":670,"Src":"j + 6","NODE":"BinaryOperation","id":98,"type":"uint256","numChars":5,"operator":"+"}
+//~ ------- {"startChar":670,"Src":"j","NODE":"Identifier","id":96,"type":"uint256","numChars":1,"value":"j"}
+//~ ------- {"subdenomination":"null","startChar":674,"Src":"6","NODE":"Literal","hexvalue":"36","id":97,"type":"int_const 6","numChars":1,"value":"6","token":"null"}
+              
+//~ ---- {"startChar":654,"Src":"i = i + 4","NODE":"ExpressionStatement","id":94,"numChars":9}
+//~ ----- {"startChar":654,"Src":"i = i + 4","NODE":"Assignment","id":93,"type":"uint256","numChars":9,"operator":"="}
+//~ ------ {"startChar":654,"Src":"i","NODE":"Identifier","id":89,"type":"uint256","numChars":1,"value":"i"}
+//~ ------ {"startChar":658,"Src":"i + 4","NODE":"BinaryOperation","id":92,"type":"uint256","numChars":5,"operator":"+"}
+//~ ------- {"startChar":658,"Src":"i","NODE":"Identifier","id":90,"type":"uint256","numChars":1,"value":"i"}
+//~ ------- {"subdenomination":"null","startChar":662,"Src":"4","NODE":"Literal","hexvalue":"34","id":91,"type":"int_const 4","numChars":1,"value":"4","token":"null"}
+
+//~ ---- {"startChar":666,"Src":"i = j + 6","NODE":"ExpressionStatement","id":100,"numChars":9}
+//~ ----- {"startChar":666,"Src":"i = j + 6","NODE":"Assignment","id":99,"type":"uint256","numChars":9,"operator":"="}
+//~ ------ {"startChar":666,"Src":"i","NODE":"Identifier","id":95,"type":"uint256","numChars":1,"value":"i"}
+//~ ------ {"startChar":670,"Src":"j + 6","NODE":"BinaryOperation","id":98,"type":"uint256","numChars":5,"operator":"+"}
+//~ ------- {"startChar":670,"Src":"j","NODE":"Identifier","id":96,"type":"uint256","numChars":1,"value":"j"}
+//~ ------- {"subdenomination":"null","startChar":674,"Src":"6","NODE":"Literal","hexvalue":"36","id":97,"type":"int_const 6","numChars":1,"value":"6","token":"null"}
+              
+///////////////////////////////////////              
+BreakStmt(?x) :- Throw(?x, ?startChar, ?numChars).   
+BreakStmt(?x) :- Return(?x, ?startChar, ?numChars).   
+BreakStmt(?x) :- Break(?x, ?startChar, ?numChars).   
+BreakStmt(?x) :- Continue(?x, ?startChar, ?numChars).   
+
+// add rules for
+//    Finding if send is last statement or is there any invoke/assign in send
+//    Assign
+//    Contract invocation
+//    Contract construction
+//    Nop Statements
+
+Flow(?x, ?y) :- FunctionCode(?z, ?x), FunctionCode(?z, ?y),
+              Ancestor(?ax, ?x),
+              Pred(?ax, ?y), 
+              Ancestor(?x, ?someStmt), 
+              !BreakStmt(?someStmt).
+
+// there is flow from x to y if: 
+//     both x and y are inside the same function's code for some function z, and
+//     some x's ancestor ax is a predecessor of some y's ancestor ay, and
+//     those two ancestors ax and ay are descendents of function z, and
+//     x is not the ancestor of a BreakStmt statement
+// or ... (see below)
+
+Flow(?x, ?y) :- FunctionCode(?f, ?x), FunctionCode(?f, ?y), Parent(?x, ?y).
+Flow(?x, ?y) :- Flow(?x, ?z), Flow(?z, ?y).
+//     x is a parent of y and both are in the same function's code
+// or ... (see below)
+
+
+//~ BranchBetween(?x, ?y) :- Ancestor(?ax1, ?x),
+                      //~ Pred(?ax1, ?y), 
+                         //~ Ancestor(?ax2, ?x), 
+                      //~ Pred(?ax2, ?z), 
+                      //~ Ancestor(?ax1, ?ax2).
+
+FlowAcross(?x, ?y) :- Invoke(?x, ?objType, ?instanceName, ?methodName, ?retType), 
+                     FunctionDefinition(?z, ?startChar1, ?numChars1, ?constant, ?payable, ?visibility, ?methodName),
+                      Block(?y, ?startChar2, ?numChars2),
+                      Parent(?z, ?y).                     
+// from one method to another
+                    
+//////////
+//~ --- {"Src":"{ \t//~ if (! \treceiver.send(ho[...]","NODE":"Block"}
+//~ ---- {"Src":"receiver.send(howMany)","NODE":"ExpressionStatement"}
+//~ ----- {"Src":"receiver.send(howMany)","NODE":"FunctionCall","typeconversion":"false","type":"bool"}
+//~ ------ {"Src":"receiver.send","NODE":"MemberAccess","type":"function (uint256) returns (bool)","membername":"send"}
+//~ ------- {"Src":"receiver","NODE":"Identifier","type":"address","value":"receiver"}
+//~ ------ {"Src":"howMany","NODE":"Identifier","type":"uint256","value":"howMany"}
+//~ ---- {"Src":"bar(howMany, abc, receiver)","NODE":"ExpressionStatement"}
+//~ ----- {"Src":"bar(howMany, abc, receiver)","NODE":"FunctionCall","typeconversion":"false","type":"tuple()"}
+//~ ------ {"Src":"bar","NODE":"Identifier","type":"function (uint256,uint256,address)","value":"bar"}
+//~ ------ {"Src":"howMany","NODE":"Identifier","type":"uint256","value":"howMany"}
+//~ ------ {"Src":"abc","NODE":"Identifier","type":"uint256","value":"abc"}
+//~ ------ {"Src":"receiver","NODE":"Identifier","type":"address","value":"receiver"}
+
+//~ FlowAlt(?x, ?y) :- !Parent(?x, ?ANY1), 
+                 //~ FunctionCode(?z, ?x), FunctionCode(?z, ?y),
+                 //~ Ancestor(?ax, ?x), Ancestor(?ay, ?y),
+                 //~ Ancestor(?z, ?ax), Ancestor(?z, ?ay),
+                 //~ Pred(?ax, ?ay),
+                 //~ !BreakStmt(?x),
+                 //~ !BranchBetween(?x, ?y).
+
+//~ ---- {"Src":"if (! \treceiver.send(howMany) [...]","NODE":"IfStatement"}
+//~ ----- {"Src":"! \treceiver.send(howMany)","NODE":"UnaryOperation","prefix":"true","type":"bool","operator":"!"}
+//~ ------ {"Src":"receiver.send(howMany)","NODE":"FunctionCall","typeconversion":"false","type":"bool"}
+//~ ------- {"Src":"receiver.send","NODE":"MemberAccess","type":"function (uint256) returns (bool)","membername":"send"}
+//~ -------- {"Src":"receiver","NODE":"Identifier","type":"address","value":"receiver"}
+//~ ------- {"Src":"howMany","NODE":"Identifier","type":"uint256","value":"howMany"}
+//~ ----- {"Src":"throw","NODE":"Throw"}
+
+
+// there is flow from  x to y if:
+//     there is no child of x (i.e., x is a leaf node), and
+//     both x and y are inside the same function's code for some function z, and
+//     some x's ancestor ax is a predecessor of some y's ancestor ay, and
+//     those two ancestors ax and ay are descendents of function z
+//     x is not a Break statement
+//     There is no branch below on the path from x to y.
+
+//FlowAlt(?x, ?y) :- FunctionCode(?z, ?x), FunctionCode(?z, ?y), Parent(?x, ?y).
+
+FunctionCode(?z, ?y) :- Ancestor(?x, ?y), 
+                     FunctionDefinition(?z, ?startChar1, ?numChars1, ?constant, ?payable, ?visibility, ?name),
+                     Block(?x, ?startChar2, ?numChars2),
+                     Parent(?z, ?x).                     
+// y is code inside function z if:
+//    y is inside a 'Block' node x that is the child of a 'FunctionDefinition' node z
+
+
+Ancestor(?x, ?y) :- Ancestor(?x, ?z), Ancestor(?z, ?y).
+
+Ancestor(?x, ?y) :- Parent(?x, ?y).
+
+SecondChild(?x, ?y) :- FirstChild(?x, ?z), Pred(?z, ?y).
+
+FuncParamDef(?x, ?y) :- FirstChild(?x, ?y), FunctionDefinition(?x, ?startChar, ?numChars, ?constant, ?payable, ?visibility, ?name).
+
+FuncRetDef(?x, ?y) :- FuncParamDef(?x, ?z), Pred(?z, ?y).
+
+FuncBody(?x, ?y) :- FuncRetDef(?x, ?z), Pred(?z, ?y).
+
+Func(?x, ?x) :- FuncParamDef(?x, ?y).
+
+//NoChild(?x) :- !Parent(?x, ?y).
+
+Invoke(?statementID, ?objType, ?instanceName, ?methodName, ?retType) :- 
+       FunctionCall(?statementID, ?startChar1, ?numChars1, ?typeConversion, ?retType), 
+       MemberAccess(?subStatementID, ?startChar2, ?numChars2, ?methodName, ?type1), 
+       FirstChild(?statementID, ?subStatementID),  
+       MemberAccess(?subSubStatementID, ?startChar3, ?numChars3, ?instanceName, ?objType),
+       FirstChild(?subStatementID, ?subSubStatementID).
+       
+Invoke(?statementID, ?objType, ?instanceName, ?methodName, ?retType) :-        
+       FunctionCall(?statementID, ?startChar1, ?numChars1, ?typeConversion, ?retType), 
+       MemberAccess(?subStatementID, ?startChar2, ?numChars2, ?methodName, ?type1), 
+       FirstChild(?statementID, ?subStatementID),  
+       Identifier(?subSubStatementID, ?startChar3, ?numChars3, ?objType, ?instanceName),
+       Parent(?subStatementID, ?subSubStatementID).
+       
+Invoke(?statementID, 'unknown', 'this', ?methodName, ?retType) :-        
+       FunctionCall(?statementID, ?startChar1, ?numChars1, ?typeConversion, ?retType), 
+       Identifier(?subStatementID, ?startChar2, ?numChars2, ?idType, ?methodName), 
+       FirstChild(?statementID, ?subStatementID).
+       
+Invoke(?statementID, 'unknown', 'this', '<constructor>', ?retType) :-        
+       FunctionCall(?statementID, ?startChar1, ?numChars1, ?typeConversion, ?retType), 
+       NewExpression(?subStatementID, ?startChar2, ?numChars2, ?idType), 
+       FirstChild(?statementID, ?subStatementID).
+       
+
+//~ Identifier(type:String, value:String);\
+//~ --------- {"Src":"settle(firstPlayer, playAmount[...]","NODE":"FunctionCall","typeconversion":"false","type":"tuple()"}
+//~ ---------- {"Src":"settle","NODE":"Identifier","type":"function (address,uint256)","value":"settle"}
+//~ ---------- {"Src":"firstPlayer","NODE":"Identifier","type":"address","value":"firstPlayer"}
+//~ ---------- {"Src":"playAmount * 2","NODE":"BinaryOperation","type":"uint256","operator":"*"}
+//~ ----------- {"Src":"playAmount","NODE":"Identifier","type":"uint256","value":"playAmount"}
+//~ ----------- {"subdenomination":"null","Src":"2","NODE":"Literal","hexvalue":"32","type":"int_const 2","value":"2","token":"null"}
+
+//~ ----- {"Src":"NewTokenPurchase(msg.sender, m[...]","NODE":"FunctionCall","typeconversion":"false","type":"tuple()"}
+//~ ------ {"Src":"NewTokenPurchase","NODE":"Identifier","type":"function (address,uint256) constant","value":"NewTokenPurchase"}
+//~ ------ {"Src":"msg.sender","NODE":"MemberAccess","type":"address","membername":"sender"}
+//~ ------- {"Src":"msg","NODE":"Identifier","type":"msg","value":"msg"}
+//~ ------ {"Src":"msg.value","NODE":"MemberAccess","type":"uint256","membername":"value"}
+//~ ------- {"Src":"msg","NODE":"Identifier","type":"msg","value":"msg"}
+
+//~ ------ {"Src":"receiver.send(howMany)","NODE":"FunctionCall","typeconversion":"false","type":"bool"}
+//~ ------- {"Src":"receiver.send","NODE":"MemberAccess","type":"function (uint256) returns (bool)","membername":"send"}
+//~ -------- {"Src":"receiver","NODE":"Identifier","type":"address","value":"receiver"}
+//~ ------- {"Src":"howMany","NODE":"Identifier","type":"uint256","value":"howMany"}
+
+//~ ------ {"Src":"msg.sender.send(10000)","NODE":"FunctionCall","type_conversion":"false","id":93854443427856,"type":"bool","numChars":22}
+//~ ------- {"Src":"msg.sender.send","NODE":"MemberAccess","id":93854443427504,"member_name":"send","type":"function (uint256) returns (bool)","numChars":15}
+//~ -------- {"Src":"msg.sender","NODE":"MemberAccess","id":93854443427312,"member_name":"sender","type":"address","numChars":10}
+//~ --------- {"Src":"msg","NODE":"Identifier","id":93854443427152,"type":"msg","numChars":3,"value":"msg"}
+//~ ------- {"subdenomination":"null","startChar":136,"Src":"10000","NODE":"Literal","hexvalue":"3130303030","id":93854443427696,"type":"int_const 10000","numChars":5,"value":"10000","token":"null"}
+//~ ----
+
+
+// load basis basis.txt
+// !java -jar SolidityToDatalog.jar dummy.sol dummy.facts
+// !java -jar SolidityToDatalog.jar RPS.sol RPS.facts
+// load facts dummy.facts
+// load rules rules.txt
+// map :a as $statementID => #Invoke
+// find #Invoke:a
+// map :b as $statementID => #Src
+// find #Invoke:a:b
+// find #Src
+// find #Invoke:a where {@methodName = 'send'}
+// find #LastChild where {@parent = #Invoke}
+// def #foo as #Invoke where {@methodName = 'send'}
+// find #LastChild where {@child = #foo}
+// find #FirstChild where {@child = #foo}
+// map :c as $statementID => #Src.@text, $statementID => #Src.@text
+// find #Flow:c where {@from = #Throw}
+// def #send as #Invoke where {@methodName = 'send'}
+// find #send
+// find #send:a
