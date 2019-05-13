@@ -6,10 +6,9 @@ import org.sh.reflect.web._
 object GenerateWebBoxHTML  {  
   val formObjects = Array(
     Analyzer,
-    AnalyzerMultiTenant
-//    ,
-//    Config,
-//    Compiler
+    AnalyzerMultiTenant,
+    Config,
+    Compiler
   )
   val htmlFilePrefix = "" // this will be prepended to html file name
   def main(args:Array[String]) { 

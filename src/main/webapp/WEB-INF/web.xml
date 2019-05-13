@@ -1,0 +1,38 @@
+<web-app>
+    <servlet>
+        <servlet-name>WebQueryResponder</servlet-name>
+        <servlet-class>org.sh.reflect.web.server.WebQueryResponder</servlet-class>
+    </servlet> 
+    <servlet>
+        <servlet-name>FileUploader</servlet-name>
+        <servlet-class>org.sh.reflect.web.server.FileUploaderNIO</servlet-class>
+    </servlet> 
+    <servlet>
+        <servlet-name>FileDownloader</servlet-name>
+        <servlet-class>org.sh.reflect.web.server.FileDownloaderNIO</servlet-class>
+    </servlet> 
+    <servlet>
+        <servlet-name>InitializeProxyServlet</servlet-name>
+        <servlet-class>sdql.InitializeProxyServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet> 
+    
+    <!-- mapping -->
+    <servlet-mapping> 
+		<servlet-name>WebQueryResponder</servlet-name>
+		<url-pattern>/web</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping> 
+		<servlet-name>FileUploader</servlet-name>
+		<url-pattern>/putfile</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping> 
+		<servlet-name>FileDownloader</servlet-name>
+		<url-pattern>/getfile</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping> 
+		<servlet-name>InitializeProxyServlet</servlet-name>
+		<url-pattern>/init</url-pattern>
+    </servlet-mapping>
+</web-app>
+
