@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 import org.sh.reflect.DefaultTypeHandler
 import org.sh.reflect.Proxy
-import org.sh.reflect.web.Text
+import org.sh.easyweb.Text
 
 class InitializeProxyServlet extends HttpServlet {
   InitializeProxy // refer to initialize object to start Proxy server

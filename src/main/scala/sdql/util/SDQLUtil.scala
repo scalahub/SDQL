@@ -5,7 +5,7 @@ import acc.SolidityToDatalog
 import acc.util.JSONUtil
 import dql.DQLUtil
 import dql.DQLUtil._
-import org.sh.reflect.web.Text
+import org.sh.easyweb.Text
 import sdql.util.AnalyzerUtil._
 import sdql.util.FileUtil._
 import trap.CryptoUtil

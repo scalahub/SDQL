@@ -1,15 +1,15 @@
 <web-app>
     <servlet>
         <servlet-name>WebQueryResponder</servlet-name>
-        <servlet-class>org.sh.reflect.web.server.WebQueryResponder</servlet-class>
+        <servlet-class>org.sh.easyweb.server.WebQueryResponder</servlet-class>
     </servlet> 
     <servlet>
         <servlet-name>FileUploader</servlet-name>
-        <servlet-class>org.sh.reflect.web.server.FileUploaderNIO</servlet-class>
+        <servlet-class>org.sh.easyweb.server.FileUploaderNIO</servlet-class>
     </servlet> 
     <servlet>
         <servlet-name>FileDownloader</servlet-name>
-        <servlet-class>org.sh.reflect.web.server.FileDownloaderNIO</servlet-class>
+        <servlet-class>org.sh.easyweb.server.FileDownloaderNIO</servlet-class>
     </servlet> 
     <servlet>
         <servlet-name>InitializeProxyServlet</servlet-name>

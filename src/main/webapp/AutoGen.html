@@ -7,14 +7,14 @@ Otherwise your changes may be lost the next time this file is generated.
   
 Instead edit the file that generated this code. Refer below for details
 
-Class that generated this code: org.sh.reflect.web.HTMLClientCodeGenerator
+Class that generated this code: org.sh.easyweb.HTMLClientCodeGenerator
 
 Stacktrace of the call is given below:
 
 org.sh.reflect.CodeGenUtil$:CodeGenUtil.scala:80
-org.sh.reflect.web.HTMLConstants$:HTMLConstants.scala:15
-org.sh.reflect.web.HTMLClientCodeGenerator:HTMLClientCodeGenerator.scala:109
-org.sh.reflect.web.HTMLClientCodeGenerator:HTMLClientCodeGenerator.scala:72
+org.sh.easyweb.HTMLConstants$:HTMLConstants.scala:15
+org.sh.easyweb.HTMLClientCodeGenerator:HTMLClientCodeGenerator.scala:109
+org.sh.easyweb.HTMLClientCodeGenerator:HTMLClientCodeGenerator.scala:72
 -->
 
 <html>
@@ -505,13 +505,13 @@ function changeBGIfLocalhost() {
         <th>Original Name</th>
         <th>Parameters</th>
         <th>Return Type</th>
-      </tr><tr><td><a href="#sdql.Analyzer.addBugPattern">addBugPattern</a></td><td>addBugPattern</td><td>(name:String, description:String, sdql:org.sh.reflect.web.Text, level:int)</td><td>String</td></tr><tr><td><a href="#sdql.Analyzer.doAnalysis">doAnalysis</a></td><td>doAnalysis</td><td>(solidityCode:org.sh.reflect.web.Text)</td><td>org.json.JSONObject</td></tr><tr><td><a href="#sdql.Analyzer.getBugPatterns">getBugPatterns</a></td><td>getBugPatterns</td><td></td><td>org.json.JSONObject</td></tr>
+      </tr><tr><td><a href="#sdql.Analyzer.addBugPattern">addBugPattern</a></td><td>addBugPattern</td><td>(name:String, description:String, sdql:org.sh.easyweb.Text, level:int)</td><td>String</td></tr><tr><td><a href="#sdql.Analyzer.doAnalysis">doAnalysis</a></td><td>doAnalysis</td><td>(solidityCode:org.sh.easyweb.Text)</td><td>org.json.JSONObject</td></tr><tr><td><a href="#sdql.Analyzer.getBugPatterns">getBugPatterns</a></td><td>getBugPatterns</td><td></td><td>org.json.JSONObject</td></tr>
     </table>
 <br>
 
 <form id="sdql.Analyzer.addBugPattern" class="elegant-aero">
 
- <h1><small>sdql.Analyzer.addBugPattern</small></h1><h4><b>Info</b>: Replace with your own values. NOTE: Bug pattern will not be saved across restarts!</h4>
+ <h1><small>sdql.Analyzer.addBugPattern</small></h1>
 
    <label>
     <span>name [String]:</span>
@@ -552,7 +552,7 @@ find #Flow:firstSrc where {@src = #Invoke}</textarea><br>
 
 <form id="sdql.Analyzer.doAnalysis" class="elegant-aero">
 
- <h1><small>sdql.Analyzer.doAnalysis</small></h1><h4><b>Info</b>: Replace below sample code with your own. The sample code contains the bugs we are catching</h4>
+ <h1><small>sdql.Analyzer.doAnalysis</small></h1>
 
    <label>
     <span>solidityCode [Text]:</span>
@@ -662,7 +662,7 @@ contract BugInLoop {
         <th>Original Name</th>
         <th>Parameters</th>
         <th>Return Type</th>
-      </tr><tr><td><a href="#sdql.AnalyzerMultiTenant.userCreate">userCreate</a></td><td>userCreate</td><td>(userID:String)</td><td>long</td></tr><tr><td><a href="#sdql.AnalyzerMultiTenant.userDeleteBugPattern">userDeleteBugPattern</a></td><td>userDeleteBugPattern</td><td>(userID:String, patternID:String)</td><td>int</td></tr><tr><td><a href="#sdql.AnalyzerMultiTenant.userDoAnalysis">userDoAnalysis</a></td><td>userDoAnalysis</td><td>(userID:String, solidityCode:org.sh.reflect.web.Text)</td><td>org.json.JSONObject</td></tr><tr><td><a href="#sdql.AnalyzerMultiTenant.userGetBugPatterns">userGetBugPatterns</a></td><td>userGetBugPatterns</td><td>(userID:String)</td><td>org.json.JSONObject</td></tr>
+      </tr><tr><td><a href="#sdql.AnalyzerMultiTenant.userCreate">userCreate</a></td><td>userCreate</td><td>(userID:String)</td><td>long</td></tr><tr><td><a href="#sdql.AnalyzerMultiTenant.userDeleteBugPattern">userDeleteBugPattern</a></td><td>userDeleteBugPattern</td><td>(userID:String, patternID:String)</td><td>int</td></tr><tr><td><a href="#sdql.AnalyzerMultiTenant.userDoAnalysis">userDoAnalysis</a></td><td>userDoAnalysis</td><td>(userID:String, solidityCode:org.sh.easyweb.Text)</td><td>org.json.JSONObject</td></tr><tr><td><a href="#sdql.AnalyzerMultiTenant.userGetBugPatterns">userGetBugPatterns</a></td><td>userGetBugPatterns</td><td>(userID:String)</td><td>org.json.JSONObject</td></tr>
     </table>
 <br>
 
@@ -712,7 +712,7 @@ contract BugInLoop {
 
 <form id="sdql.AnalyzerMultiTenant.userDoAnalysis" class="elegant-aero">
 
- <h1><small>sdql.AnalyzerMultiTenant.userDoAnalysis</small></h1><h4><b>Info</b>: Replace below sample code with your own. The sample code contains the bugs we are catching</h4>
+ <h1><small>sdql.AnalyzerMultiTenant.userDoAnalysis</small></h1>
 
    <label>
     <span>userID [String]:</span>
@@ -759,7 +759,7 @@ contract BugInLoop {
         <th>Original Name</th>
         <th>Parameters</th>
         <th>Return Type</th>
-      </tr><tr><td><a href="#sdql.Compiler.compileSDQLCode">compileSDQLCode</a></td><td>compileSDQLCode</td><td>(sdqlCode:org.sh.reflect.web.Text)</td><td>String</td></tr><tr><td><a href="#sdql.Compiler.compileSolidityCode">compileSolidityCode</a></td><td>compileSolidityCode</td><td>(solidityCode:org.sh.reflect.web.Text, printTree:boolean)</td><td>String[]</td></tr>
+      </tr><tr><td><a href="#sdql.Compiler.compileSDQLCode">compileSDQLCode</a></td><td>compileSDQLCode</td><td>(sdqlCode:org.sh.easyweb.Text)</td><td>String</td></tr><tr><td><a href="#sdql.Compiler.compileSolidityCode">compileSolidityCode</a></td><td>compileSolidityCode</td><td>(solidityCode:org.sh.easyweb.Text, printTree:boolean)</td><td>String[]</td></tr>
     </table>
 <br>
 
@@ -789,7 +789,7 @@ find #ContractDefinition
 
 <form id="sdql.Compiler.compileSolidityCode" class="elegant-aero">
 
- <h1><small>sdql.Compiler.compileSolidityCode</small></h1><h4><b>Info</b>: If printTree is true then it will output AST, else it will output Datalog facts</h4>
+ <h1><small>sdql.Compiler.compileSolidityCode</small></h1>
 
    <label>
     <span>solidityCode [Text]:</span>
@@ -831,13 +831,13 @@ contract SimpleStorage {
         <th>Original Name</th>
         <th>Parameters</th>
         <th>Return Type</th>
-      </tr><tr><td><a href="#sdql.Config.getBasis">getBasis</a></td><td>getBasis</td><td></td><td>String[]</td></tr><tr><td><a href="#sdql.Config.getMappings">getMappings</a></td><td>getMappings</td><td></td><td>scala.collection.immutable.Seq</td></tr><tr><td><a href="#sdql.Config.getRules">getRules</a></td><td>getRules</td><td></td><td>String[]</td></tr><tr><td><a href="#sdql.Config.setBasisAndRules">setBasisAndRules</a></td><td>setBasisAndRules</td><td>(basis:org.sh.reflect.web.Text, rules:org.sh.reflect.web.Text)</td><td>String</td></tr><tr><td><a href="#sdql.Config.setMappings">setMappings</a></td><td>setMappings</td><td>(mappings:org.sh.reflect.web.Text)</td><td>String</td></tr>
+      </tr><tr><td><a href="#sdql.Config.getBasis">getBasis</a></td><td>getBasis</td><td></td><td>String[]</td></tr><tr><td><a href="#sdql.Config.getMappings">getMappings</a></td><td>getMappings</td><td></td><td>scala.collection.immutable.Seq</td></tr><tr><td><a href="#sdql.Config.getRules">getRules</a></td><td>getRules</td><td></td><td>String[]</td></tr><tr><td><a href="#sdql.Config.setBasisAndRules">setBasisAndRules</a></td><td>setBasisAndRules</td><td>(basis:org.sh.easyweb.Text, rules:org.sh.easyweb.Text)</td><td>String</td></tr><tr><td><a href="#sdql.Config.setMappings">setMappings</a></td><td>setMappings</td><td>(mappings:org.sh.easyweb.Text)</td><td>String</td></tr>
     </table>
 <br>
 
 <form id="sdql.Config.getBasis" class="elegant-aero">
 
- <h1><small>sdql.Config.getBasis</small></h1><h4><b>Info</b>: In the output [T] indicates that pattern is traversible (i.e., returns primary keys)</h4>
+ <h1><small>sdql.Config.getBasis</small></h1>
    <label>
      <span></span>
      <input value="submit" type="button" onclick='JavaScript:xmlhttpPostSend("2NuRNo2HHIGz5Dko","getBasis","sdql.Config.getBasis",[],"sdql.Config_getBasis_Ans")'>

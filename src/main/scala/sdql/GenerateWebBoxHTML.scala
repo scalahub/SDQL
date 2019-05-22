@@ -1,7 +1,7 @@
 
 package sdql
 
-import org.sh.reflect.web._
+import org.sh.easyweb._
 
 object GenerateWebBoxHTML  {  
   val formObjects = Array(

@@ -9,12 +9,12 @@ import trap.dsl.DSLToXDSL
 import trap.dsl.DSLToXDSL._
 import trap.file.Util._
 import org.sh.db.config.DBConfigFromFile
-import org.sh.reflect.web.Text
+import org.sh.easyweb.Text
 import scala.util.Random._
 import sdql.util.AnalyzerUtil
 import trap.Util._
 import acc.SolidityToDatalog
-import org.sh.reflect.web.server.FileStore
+import org.sh.easyweb.server.FileStore
 import acc.sdql.SolidityToXSolidity
 import acc.sdql.XSolidityLoader
 import acc.sdql.XSolidityToDatalog

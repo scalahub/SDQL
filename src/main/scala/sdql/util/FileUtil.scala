@@ -3,7 +3,7 @@ package sdql.util
 
 import dql.DQLUtil
 import java.io.File
-import org.sh.reflect.web.Text
+import org.sh.easyweb.Text
 import scala.util.Random._
 import trap.file.Util._
 
