@@ -6,11 +6,11 @@ import javax.servlet.http.HttpServlet
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 import org.sh.reflect.DefaultTypeHandler
-import org.sh.reflect.Proxy
+import org.sh.reflect.EasyProxy
 import org.sh.easyweb.Text
 
 class InitializeProxyServlet extends HttpServlet {
-  InitializeProxy // refer to initialize object to start Proxy server
+  InitializeProxy // refer to initialize object to start EasyProxy server
 }
 
 class AnalyzerBackendServlet extends HttpServlet {
@@ -90,13 +90,13 @@ object InitializeProxy {
   Config // ???
   Compiler // load basis
   GenerateWebBoxHTML.formObjects.foreach{obj =>
-    Proxy.addProcessor("", obj, DefaultTypeHandler, true)
+    EasyProxy.addProcessor("", obj, DefaultTypeHandler, true)
   }
   println("INITIALIZE DONE")
-//    Proxy.addProcessor("", Analyzer, DefaultTypeHandler, true)
-//    Proxy.addProcessor("", SDQLAdmin, DefaultTypeHandler, true)
-//    Proxy.addProcessor("", SDQLCompiler, DefaultTypeHandler, true)
-//    Proxy.addProcessor("", SolidityCompiler, DefaultTypeHandler, true)
+//    EasyProxy.addProcessor("", Analyzer, DefaultTypeHandler, true)
+//    EasyProxy.addProcessor("", SDQLAdmin, DefaultTypeHandler, true)
+//    EasyProxy.addProcessor("", SDQLCompiler, DefaultTypeHandler, true)
+//    EasyProxy.addProcessor("", SolidityCompiler, DefaultTypeHandler, true)
 }
 
 
