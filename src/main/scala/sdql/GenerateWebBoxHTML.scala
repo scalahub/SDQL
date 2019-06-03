@@ -25,7 +25,7 @@ It is highly configurable and has a user-friendly syntax.
     try {
       cg.autoGenerateToFile(htmlFilePrefix, "src/main/webapp", "")    	
     } catch { case t:Throwable => t.printStackTrace } 
-    finally System.exit(1)
+    //finally System.exit(0)
   }
 }
 
