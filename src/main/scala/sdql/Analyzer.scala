@@ -1,31 +1,23 @@
 
 package sdql
 
+import java.io.{ByteArrayOutputStream, File, PrintStream}
+
+import acc.SolidityToDatalog
+import acc.sdql.XSolidityLoader
+import acc.util.JSONUtil
 import dql.DQLUtil
-import java.io.ByteArrayOutputStream
-import java.io.File
-import java.io.PrintStream
-import trap.dsl.DSLToXDSL
-import trap.dsl.DSLToXDSL._
-import trap.file.Util._
 import org.sh.db.config.DBConfigFromFile
 import org.sh.easyweb.Text
-import scala.util.Random._
-import sdql.util.AnalyzerUtil
-import trap.Util._
-import acc.SolidityToDatalog
-import org.sh.easyweb.server.FileStore
-import acc.sdql.SolidityToXSolidity
-import acc.sdql.XSolidityLoader
-import acc.sdql.XSolidityToDatalog
-import acc.util.JSONUtil
-import acc.util.JSONUtil.JsonFormatted
 import org.sh.utils.common.Util._
-import util.FileUtil._
-import util.SDQLUtil._
-import dql.DQLUtil._
-import util.AnalyzerUtil._
-import util.BugPattern
+import sdql.util.AnalyzerUtil._
+import sdql.util.BugPattern
+import sdql.util.FileUtil._
+import sdql.util.SDQLUtil._
+import trap.file.Util._
+
+import scala.collection.JavaConverters._
+import scala.util.Random._
 
 object Compiler {
   //val solidityRulesFile = "rules.txt"
@@ -170,7 +162,7 @@ object Analyzer {
 find #Flow:firstSrc where {@src = #Invoke}"""
     
     val id = "Bug-"+(getAllBugPatterns.size+1)
-    val newCode = sdql.getText.lines.toSeq
+    val newCode = sdql.getText.lines.iterator().asScala.toSeq
     val newPattern = BugPattern(id, name, description, newCode, level)
     val header = "patterns sdql"
     val olderCode = getAllBugPatterns.flatMap(_.sdql).filterNot{_.startsWith("find")}
@@ -362,9 +354,7 @@ object Config {
     ps.println(s" ======= EXTENDED BASIS ($rightSize facts) =======")
     ps.println
     right.foreach{l => ps.println(l.signature)}
-//  
-//    basisUtil.printDetailsForPatterns(ps, right)
-    baos.toString.lines.toArray; // e.g. ISO-8859-1
+    baos.toString.lines.iterator().asScala.toArray; // e.g. ISO-8859-1
   }  
   def getRules = {
     val ruleFilter = DQLUtil.optRuleFilter.getOrElse(throw new Exception("No rules defined"))

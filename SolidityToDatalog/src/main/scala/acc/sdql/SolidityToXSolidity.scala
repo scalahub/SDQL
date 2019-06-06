@@ -1,10 +1,8 @@
 package acc.sdql
 
-//import java.io.ByteArrayOutputStream
-//import java.io.PrintWriter
 import org.ethereum.solidity.compiler.SolidityCompiler
 import trap.Util
-//import scala.sys.process.ProcessLogger
+import scala.collection.JavaConverters._
 
 object SolidityToXSolidity {
   def getXML(solFile:String):xml.Elem = {
@@ -20,7 +18,7 @@ object SolidityToXSolidity {
     // val (code, out, err) = runCommand(Seq("solc", "--combined-json", "metadata", solFile))
     if (code == 0){
       val lines = out.lines 
-      val json = lines.filterNot(line => line.startsWith("=======") || line.startsWith("JSON AST:")).mkString
+      val json = lines.iterator().asScala.filterNot(line => line.startsWith("=======") || line.startsWith("JSON AST:")).mkString
       acc.util.JSONUtil.jsonStringToXML(json)      
     } else throw new Exception(err)
   }  
@@ -33,7 +31,7 @@ object SolidityToXSolidity {
     
     if (err == "") {
       val lines = out.lines 
-      val json = lines.filterNot(line => line.startsWith("=======") || line.startsWith("JSON AST:")).mkString
+      val json = lines.iterator().asScala.filterNot(line => line.startsWith("=======") || line.startsWith("JSON AST:")).mkString
       acc.util.JSONUtil.jsonStringToXML(json)      
     } else throw new Exception(err)
       
