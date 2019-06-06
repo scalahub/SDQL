@@ -18,9 +18,11 @@ lazy val SolidityToDatalog = (project in file("SolidityToDatalog")).settings(
   libraryDependencies += "org.ethereum" % "ethereumj-core" % "1.12.0-RELEASE"
 ).dependsOn(DQL,ScalaUtils)
 
+//SDQLDemo
 lazy val root = (project in file(".")).settings(
   name := "SDQL",
-  mainClass in (Compile, run) := Some("sdql.GenerateWebBoxHTML")
+  mainClass in (Compile, run) := Some("sdql.SDQLDemo")
+  //mainClass in (Compile, run) := Some("sdql.GenerateWebBoxHTML")
   //mainClass in (Test, run) := Some("sdql.Test")	
 ).dependsOn(
   SolidityToDatalog,EasyWeb,BetterDB
