@@ -336,7 +336,6 @@ object Config {
     val basisUtil = DQLUtil.optBasisUtil.getOrElse(throw new Exception("No basis defined"))
     val config = DQLUtil.optConfig.getOrElse(throw new Exception("No basis defined"))
     val reduced = config.reducedBasis.map(_.factName)
-//    basisUtil.patterns.foreach(x => println(x.name))
     val (left, right) = basisUtil.patterns.partition(x => reduced.contains(x.name.tail)) // tail removes the '#' from pattern name
 
     val leftSize = left.size
@@ -347,8 +346,6 @@ object Config {
     ps.println(s" ======= REDUCED BASIS ($leftSize facts) =======")
     ps.println
     left.foreach{l => ps.println(l.signature)}
-//    basisUtil.printDetailsForPatterns(ps, left)
-    // DQLUtil.optBasisUtil.getOrElse(throw new Exception("No basis defined")).printDetails(ps)
     ps.println
     ps.println
     ps.println(s" ======= EXTENDED BASIS ($rightSize facts) =======")

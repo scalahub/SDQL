@@ -20,7 +20,10 @@ It is highly configurable and has a user-friendly syntax.
 	<h3>HOW TO USE THIS SITE</h3>
 (a) Create/obtain a SDQL file containing your analysis. Test that it compiles successfully using the method <a href='#sdql.Compiler.compileSDQLCode'>sdql.Compiler.compileSDQLCode</a>
 (b) Paste the contents of the SDQL file + Solidity file and start the analysis using the method <a href='#sdql.Analyzer.doAnalysis'>sdql.Analyzer.doAnalysis</a>."""
-    lazy val cg = new HTMLClientCodeGenerator(formObjects.toList.sortWith{(l, r) => l.getClass.getCanonicalName < r.getClass.getCanonicalName}, "web", formInfo, None, false, false)
+    lazy val cg = new HTMLClientCodeGenerator(
+      formObjects.toList.sortWith{(l, r) => l.getClass.getCanonicalName < r.getClass.getCanonicalName},
+      formInfo, None, false, false
+    )
     cg.pageTitle = "Smart Scan"
     try {
       cg.autoGenerateToFile(htmlFilePrefix, "src/main/webapp", "")    	
