@@ -1,4 +1,4 @@
-package acc.sdql.samples
+package solidity2datalog.sdql.samples
 
 object ScrapBook {
 

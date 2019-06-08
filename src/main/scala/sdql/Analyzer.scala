@@ -3,9 +3,9 @@ package sdql
 
 import java.io.{ByteArrayOutputStream, File, PrintStream}
 
-import acc.SolidityToDatalog
-import acc.sdql.XSolidityLoader
-import acc.util.JSONUtil
+import solidity2datalog.SolidityToDatalog
+import solidity2datalog.sdql.XSolidityLoader
+import solidity2datalog.util.JSONUtil
 import dql.DQLUtil
 import org.sh.db.config.DBConfigFromFile
 import org.sh.easyweb.Text

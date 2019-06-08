@@ -1,6 +1,6 @@
-package acc.sdql
+package solidity2datalog.sdql
 
-import acc.util.JSONUtil.JsonFormatted
+import solidity2datalog.util.JSONUtil.JsonFormatted
 
 object XSolidityDataStructures {
   

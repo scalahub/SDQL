@@ -1,9 +1,9 @@
 
-package acc
+package solidity2datalog
 
-//import acc.sdql.SNodeFact
-import acc.sdql.XSolidityDataStructures._
-import acc.sdql._
+//import solidity2datalog.sdql.SNodeFact
+import solidity2datalog.sdql.XSolidityDataStructures._
+import solidity2datalog.sdql._
 import trap.dsl.DSLConfig
 import trap.file.Util
 

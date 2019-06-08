@@ -1,4 +1,4 @@
-package acc.sdql
+package solidity2datalog.sdql
 
 import org.ethereum.solidity.compiler.SolidityCompiler
 import trap.Util
@@ -19,7 +19,7 @@ object SolidityToXSolidity {
     if (code == 0){
       val lines = out.lines 
       val json = lines.iterator().asScala.filterNot(line => line.startsWith("=======") || line.startsWith("JSON AST:")).mkString
-      acc.util.JSONUtil.jsonStringToXML(json)      
+      solidity2datalog.util.JSONUtil.jsonStringToXML(json)
     } else throw new Exception(err)
   }  
   def getXMLJava(solFile:String) = {
@@ -32,7 +32,7 @@ object SolidityToXSolidity {
     if (err == "") {
       val lines = out.lines 
       val json = lines.iterator().asScala.filterNot(line => line.startsWith("=======") || line.startsWith("JSON AST:")).mkString
-      acc.util.JSONUtil.jsonStringToXML(json)      
+      solidity2datalog.util.JSONUtil.jsonStringToXML(json)
     } else throw new Exception(err)
       
   }

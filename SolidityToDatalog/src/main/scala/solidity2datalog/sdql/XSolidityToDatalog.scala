@@ -1,5 +1,5 @@
 
-package acc.sdql
+package solidity2datalog.sdql
 
 
 import XSolidityDataStructures._

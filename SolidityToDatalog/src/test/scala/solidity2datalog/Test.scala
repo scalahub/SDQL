@@ -1,5 +1,5 @@
 
-package acc
+package solidity2datalog
 
 import sdql._
 object TestSolidityCompiler {

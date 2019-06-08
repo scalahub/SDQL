@@ -1,8 +1,8 @@
 package sdql.util
 
 import java.io.File
-import acc.SolidityToDatalog
-import acc.util.JSONUtil
+import solidity2datalog.SolidityToDatalog
+import solidity2datalog.util.JSONUtil
 import dql.DQLUtil
 import dql.DQLUtil._
 import org.sh.easyweb.Text

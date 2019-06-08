@@ -1,4 +1,4 @@
-package acc.util
+package solidity2datalog.util
 
 import org.json.JSONArray
 import org.json.JSONObject
