@@ -9,7 +9,7 @@ import solidity2datalog.util.JSONUtil
 import dql.DQLUtil
 import org.sh.db.config.DBConfigFromFile
 import org.sh.easyweb.Text
-import org.sh.utils.common.Util._
+import org.sh.utils.Util._
 import sdql.util.AnalyzerUtil._
 import sdql.util.BugPattern
 import sdql.util.FileUtil._
@@ -318,9 +318,9 @@ object AnalyzerTempDir {
   def clearTempDirs(password:String) = {
     if (password == "0925-924-5924-5092-59134239") {
       deleteRecursive(new File(systemTmp))
-      org.sh.utils.common.file.Util.createDir(systemTmp)
-      org.sh.utils.common.file.Util.createDir(tmpDir)
-      org.sh.utils.common.file.Util.createDir(FileStore.uploadDir)
+      org.sh.utils.file.Util.createDir(systemTmp)
+      org.sh.utils.file.Util.createDir(tmpDir)
+      org.sh.utils.file.Util.createDir(FileStore.uploadDir)
     } else throw new Exception("Invalid password.")
   }
   def getAllTmpDirs(password:String) = {

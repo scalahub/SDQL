@@ -6,7 +6,7 @@ import scala.collection.JavaConverters._
 
 object SolidityToXSolidity {
   def getXML(solFile:String):xml.Elem = {
-    org.sh.utils.common.Util.trycatch{
+    org.sh.utils.Util.trycatch{
       List(
         () => getXMLJS(solFile),
         () => getXMLJava(solFile)
@@ -23,7 +23,7 @@ object SolidityToXSolidity {
     } else throw new Exception(err)
   }  
   def getXMLJava(solFile:String) = {
-    val solCode = org.sh.utils.common.file.Util.readTextFileToString(solFile)
+    val solCode = org.sh.utils.file.Util.readTextFileToString(solFile)
     val x = SolidityCompiler.compile(solCode.getBytes, false, SolidityCompiler.Options.ASTJSON)
     val (out, err) = {
       (x.output, x.errors)

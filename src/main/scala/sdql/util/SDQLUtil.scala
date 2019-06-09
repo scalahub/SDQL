@@ -15,7 +15,7 @@ import trap.file.Util._
 object SDQLUtil {
   def compileSolidityFile(solidityFile:File) = {
     val solidityPath = solidityFile.getAbsolutePath
-    val outputDatalogFile = tmpDir + "/"+solidityFile.getName+org.sh.utils.common.Util.randomAlphanumericString(10)+".facts"
+    val outputDatalogFile = tmpDir + "/"+solidityFile.getName+org.sh.utils.Util.randomAlphanumericString(10)+".facts"
     if (fileExists(outputDatalogFile)) throw new Exception("outputFile already exists")
     val (xSolidityCompiler, facts) = SolidityToDatalog.generateDatalogFacts(solidityPath)
     xSolidityCompiler.writeFactFile(facts, outputDatalogFile)
@@ -243,7 +243,7 @@ object SDQLUtil {
     val xdsl = DSLToXDSL.compileCode(dslCode, "noFile") 
     
     val analysisID = shaSmall(DQLUtil.xmlHash(xdsl) + CryptoUtil.md5(solidityFile))+        
-                     org.sh.utils.common.Util.randomAlphanumericString(10) // added random to redo same analysis multiple times
+                     org.sh.utils.Util.randomAlphanumericString(10) // added random to redo same analysis multiple times
     val tmpWorkDir = tmpDir + "/" +analysisID    
     trap.file.Util.createDir(tmpWorkDir)
     //    if (new File(tmpWorkDir).isDirectory) throw new Exception("Analysis already exists with ID: "+analysisID+". Please delete analysis first")
@@ -263,7 +263,7 @@ object SDQLUtil {
     val xdsl = DSLToXDSL.compileCode(dslCode, sdqlFile.getName) //doCompilation(dslPath)
     
     val analysisID = shaSmall(DQLUtil.xmlHash(xdsl) + CryptoUtil.md5(solidityFile))+        
-                     org.sh.utils.common.Util.randomAlphanumericString(10) // added random to redo same analysis multiple times
+                     org.sh.utils.Util.randomAlphanumericString(10) // added random to redo same analysis multiple times
     val tmpWorkDir = tmpDir + "/" +analysisID    
     if (new File(tmpWorkDir).isDirectory) throw new Exception("Analysis already exists with ID: "+analysisID+". Please delete analysis first")
 
@@ -273,7 +273,7 @@ object SDQLUtil {
     val outputDatalogFile = tmpWorkDir + "/"+solidityFile.getName+".facts"
     
     createDir(tmpWorkDir)
-    org.sh.utils.common.Util.doOnceNow{
+    org.sh.utils.Util.doOnceNow{
       try { 
         SolidityToDatalog.generateDatalog(solidityPath, outputDatalogFile)
         DQLUtil.runDatalogWriteResults(dslCode, Array(outputDatalogFile), resultFile  )
@@ -312,7 +312,7 @@ object SDQLUtil {
 //import trap.datalog.RuleReader
 //import trap.Util._
 //import trap.xdsl.XDSLBasisUtil
-//import org.sh.utils.common.Util._
+//import org.sh.utils.Util._
 //
 //object SDQLUtil { //extends TraitFilePropertyReader {
 //  //  val propertyFile = "bootstrap.properties"

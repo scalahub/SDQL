@@ -11,8 +11,8 @@ object FileUtil {
   ///////////////////
   val systemTmp = System.getProperty("java.io.tmpdir")
   val tmpDir = DQLUtil.dqlDir //systemTmp+"/jdql"+nextInt.abs
-  org.sh.utils.common.file.Util.createDir(systemTmp)
-  org.sh.utils.common.file.Util.createDir(tmpDir)
+  org.sh.utils.file.Util.createDir(systemTmp)
+  org.sh.utils.file.Util.createDir(tmpDir)
 
   if (new java.io.File(tmpDir).isFile) throw new Exception(tmpDir+" must be a directory")
   def deleteRecursive(f:File):Boolean = if (f.isFile) f.delete else {
