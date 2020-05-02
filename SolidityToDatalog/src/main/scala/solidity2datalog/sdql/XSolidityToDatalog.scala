@@ -58,10 +58,8 @@ class XSolidityToDatalog(dslConfig:AbstractDSLConfig) {
   type SNodeFact = (String, List[Any])
   
   def getFacts(sNodes:Seq[SNode]):Seq[SNodeFact] = {
-//    def getSNodeFact(sNode:SNode, optParent:Option[SNode]):Seq[SNodeFact] = {
     def getSNodeFact(sNode:SNode, optParent:Option[SNode]):(Long, Seq[SNodeFact]) = {
       val children = sNode.children
-//      val childrenFacts:Seq[SNodeFact] = children.flatMap(getSNodeFact(_, Some(sNode)))
       val (numDescendentsSeq, childFactsSeq) = children.map{child =>
         getSNodeFact(child, Some(sNode))
         //getSNodeFact(_, Some(sNode)))
@@ -75,34 +73,27 @@ class XSolidityToDatalog(dslConfig:AbstractDSLConfig) {
         ("NumDescendents", List(sNode.id, numDescendents))
       )
       val thisFactsString = thisFacts(0)._1+":"+thisFacts(0)._2.reduceLeft(_+","+_)
-      
-//---- {"Src":"if (!receiver.send(howMany)) t[...]","NODE":"IfStatement"}
-//
-//----- {"Src":"!receiver.send(howMany)","NODE":"UnaryOperation","prefix":"true","type":"bool","operator":"!"}
-//------ {"Src":"receiver.send(howMany)","NODE":"FunctionCall","typeconversion":"false","type":"bool"}
-//------- {"Src":"receiver.send","NODE":"MemberAccess","type":"function (uint256) returns (bool)","membername":"send"}
-//-------- {"Src":"receiver","NODE":"Identifier","type":"address","value":"receiver"}
-//------- {"Src":"howMany","NODE":"Identifier","type":"uint256","value":"howMany"}
-//
-//----- {"Src":"throw","NODE":"Throw"}
-//
-//---- {"Src":"bar()","NODE":"ExpressionStatement"}
-//----- {"Src":"bar()","NODE":"FunctionCall","typeconversion":"false","type":"tuple()"}
-//------ {"Src":"bar","NODE":"Identifier","type":"function ()","value":"bar"}
+/*
+---- {"Src":"if (!receiver.send(howMany)) t[...]","NODE":"IfStatement"}
+
+----- {"Src":"!receiver.send(howMany)","NODE":"UnaryOperation","prefix":"true","type":"bool","operator":"!"}
+------ {"Src":"receiver.send(howMany)","NODE":"FunctionCall","typeconversion":"false","type":"bool"}
+------- {"Src":"receiver.send","NODE":"MemberAccess","type":"function (uint256) returns (bool)","membername":"send"}
+-------- {"Src":"receiver","NODE":"Identifier","type":"address","value":"receiver"}
+------- {"Src":"howMany","NODE":"Identifier","type":"uint256","value":"howMany"}
+
+----- {"Src":"throw","NODE":"Throw"}
+
+---- {"Src":"bar()","NODE":"ExpressionStatement"}
+----- {"Src":"bar()","NODE":"FunctionCall","typeconversion":"false","type":"tuple()"}
+------ {"Src":"bar","NODE":"Identifier","type":"function ()","value":"bar"}
+ */
     
-//	if (!receiver.send(howMany)) throw;
-//	bar();
-      
       val predFacts = if (sNode.children.isEmpty) Nil:Seq[SNodeFact] else children.tail.foldLeft(
         (children.head.id, Nil:Seq[SNodeFact])
       )(
         (leftID, right) => {
-//          right.nodeName match {
-//            case "Throw" =>
-//              (leftID._1, leftID._2)
-//            case _ => 
-            (right.id, leftID._2 :+ ("Pred", List(leftID._1, right.id)))       
-//          }
+            (right.id, leftID._2 :+ ("Pred", List(leftID._1, right.id)))
         }
       )._2
       
@@ -121,18 +112,14 @@ class XSolidityToDatalog(dslConfig:AbstractDSLConfig) {
           // and their parent-child relationship is captured using the following logic extracted from basis. 
           // Note that if Basis changes, then this code might need to change
           // 
-          //  	ParentChildSS                (parentStatement:Int{statementID}, childStatement:Int{statementID});\
+          //  ParentChildSS                (parentStatement:Int{statementID}, childStatement:Int{statementID});\
           //	ParentChildFS                (parentFunction:Int{functionID}, childStatement:Int{statementID});\
           //	ParentChildCF                (parentContract:Int{contractID}, childFunction:Int{functionID});\
           //	ParentChildCS                (parentContract:Int{contractID}, childStatement:Int{statementID}) 
           // 
           val factName = (getPriKeyName(parent), getPriKeyName(sNode)) match {
             case ("statementID", "statementID") => "Parent"
-            //            case ("statementID", "statementID") => "ParentChildSS"
-            //            case ("functionID", "statementID") => "ParentChildFS"
-            //            case ("contractID", "functionID") => "ParentChildCF"
-            //            case ("contractID", "statementID") => "ParentChildCS"
-            case (p, c) => 
+            case (p, c) =>
               throw new Exception(
                 s"${sNode.nodeName}: Unexpected parent-child pair ($p:${parent.nodeName}, $c: ${sNode.nodeName})"
               )
