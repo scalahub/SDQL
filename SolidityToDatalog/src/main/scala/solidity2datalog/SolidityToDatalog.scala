@@ -1,7 +1,6 @@
 
 package solidity2datalog
 
-//import solidity2datalog.sdql.SNodeFact
 import solidity2datalog.sdql.XSolidityDataStructures._
 import solidity2datalog.sdql._
 import trap.dsl.DSLConfig

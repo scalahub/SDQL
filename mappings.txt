@@ -8,9 +8,3 @@ map :bothSrc as $statementID => #Src, $statementID => #Src;
 map :firstSrc as $statementID => #Src, $statementID => ; 
 map :function as $statementID => #FunctionDefinition.@startChar,@numChars,@name;
 
-
-//~ map :a as $statementID => #Invoke;
-//~ map :b as $statementID => #Src;
-//~ map :c as $statementID => #Src.@text, $statementID => #Src.@text;
-//~ map :d as $statementID => #Src, $statementID => #Src;
-//~ map :e as $statementID => #Src, $statementID => ;

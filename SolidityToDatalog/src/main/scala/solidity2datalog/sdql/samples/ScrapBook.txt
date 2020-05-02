@@ -1,8 +1,4 @@
-package solidity2datalog.sdql.samples
-
-object ScrapBook {
-
-  // contains samples for writing parser
+// contains samples for writing parser
 /*
 {"name":"UsingForDirective"}
 {"name":"Return"}
@@ -40,7 +36,7 @@ object ScrapBook {
 {"name":"ExpressionStatement"}
 {"name":"MemberAccess","attributes":"member_name,type"}
 {"name":"VariableDeclarationStatement"}
-****************************************
+//****************************************
 pragma solidity ^0.4.9;
 contract Foo {}
 contract Bar {}
@@ -65,14 +61,14 @@ contract Token is Foo, Bar {
     
     Test test = structs[0x12345];
     
-  // test.amount;
+    // test.amount;
     event Deposit(
         address indexed _from,
         bytes32 indexed _id,
         uint _value
     );
     function deposit(bytes32 _id) payable {
-	// Any call to this function (even deeply nested) can
+	      // Any call to this function (even deeply nested) can
         // be detected from the JavaScript API by filtering
         // for `Deposit` to be called.
         Deposit(msg.sender, _id, msg.value);
@@ -558,71 +554,70 @@ contract Token is Foo, Bar {
 */
 
 /*
-//object Sample{
-//  // sample xml
-//  def xml = 
-//    <JSON>
-//      <children>
-//        <src>0:23:-1</src>
-//        <name>PragmaDirective</name>
-//        <attributes>
-//          <literals>solidity</literals>
-//          <literals>^</literals>
-//          <literals>0.4</literals>
-//          <literals>.9</literals>
-//        </attributes>
-//        <id>1</id>
-//      </children>
-//      <children>
-//        <src>24:39:-1</src>
-//        <name>ContractDefinition</name>
-//        <attributes>
-//          <fullyImplemented>true</fullyImplemented>
-//          <linearizedBaseContracts>2</linearizedBaseContracts>
-//          <isLibrary>false</isLibrary>
-//          <name>mortal</name>
-//        </attributes>
-//        <id>2</id>
-//      </children>
-//      <name>SourceUnit</name>
-//    </JSON>
+// sample xml
+def xml =
+  <JSON>
+    <children>
+      <src>0:23:-1</src>
+      <name>PragmaDirective</name>
+      <attributes>
+        <literals>solidity</literals>
+        <literals>^</literals>
+        <literals>0.4</literals>
+        <literals>.9</literals>
+      </attributes>
+      <id>1</id>
+    </children>
+    <children>
+      <src>24:39:-1</src>
+      <name>ContractDefinition</name>
+      <attributes>
+        <fullyImplemented>true</fullyImplemented>
+        <linearizedBaseContracts>2</linearizedBaseContracts>
+        <isLibrary>false</isLibrary>
+        <name>mortal</name>
+      </attributes>
+      <id>2</id>
+    </children>
+    <name>SourceUnit</name>
+  </JSON>
 //  
-////- {"srcChars":23,"name":"PragmaDirective","ATTR_literals":".9","id":1,"srcSt":0}
-////- {"ATTR_name":"mortal","ATTR_fullyImplemented":"true","srcChars":58,"ATTR_isLibrary":"false","name":"ContractDefinition","ATTR_linearizedBaseContracts":"8","id":8,"srcSt":24}
-////-- {"ATTR_name":"owner","ATTR_type":"address","srcChars":13,"name":"VariableDeclaration","id":3,"srcSt":44}
-////--- {"ATTR_name":"address","srcChars":7,"name":"ElementaryTypeName","id":2,"srcSt":44}
-////-- {"ATTR_name":"foo","ATTR_payable":"false","ATTR_visibility":"public","srcChars":19,"name":"FunctionDefinition","id":7,"srcSt":61,"ATTR_constant":"false"}
-////--- {"srcChars":2,"name":"ParameterList","id":4,"srcSt":73}
-////--- {"srcChars":0,"name":"ParameterList","id":5,"srcSt":76}
-////--- {"srcChars":4,"name":"Block","id":6,"srcSt":76}
+//- {"srcChars":23,"name":"PragmaDirective","ATTR_literals":".9","id":1,"srcSt":0}
+//- {"ATTR_name":"mortal","ATTR_fullyImplemented":"true","srcChars":58,"ATTR_isLibrary":"false","name":"ContractDefinition","ATTR_linearizedBaseContracts":"8","id":8,"srcSt":24}
+//-- {"ATTR_name":"owner","ATTR_type":"address","srcChars":13,"name":"VariableDeclaration","id":3,"srcSt":44}
+//--- {"ATTR_name":"address","srcChars":7,"name":"ElementaryTypeName","id":2,"srcSt":44}
+//-- {"ATTR_name":"foo","ATTR_payable":"false","ATTR_visibility":"public","srcChars":19,"name":"FunctionDefinition","id":7,"srcSt":61,"ATTR_constant":"false"}
+//--- {"srcChars":2,"name":"ParameterList","id":4,"srcSt":73}
+//--- {"srcChars":0,"name":"ParameterList","id":5,"srcSt":76}
+//--- {"srcChars":4,"name":"Block","id":6,"srcSt":76}
 
-////{"name":"FunctionDefinition","attributes":"constant,payable,visibility,name"}
-////{"name":"IfStatement","attributes":"-----"}
-////{"name":"UserDefinedTypeName","attributes":"name"}
-////{"name":"FunctionCall","attributes":"type_conversion,type"}
-////{"name":"IndexAccess","attributes":"type"}
-////{"name":"Literal","attributes":"hexvalue,subdenomination,token,type,value"}
-////{"name":"UnaryOperation","attributes":"prefix,type,operator"}
-////{"name":"Mapping","attributes":"-----"}
-////{"name":"WhileStatement","attributes":"-----"}
-////{"name":"StructDefinition","attributes":"name"}
-////{"name":"ParameterList","attributes":"-----"}
-////{"name":"PragmaDirective","attributes":"literals"}
-////{"name":"VariableDeclaration","attributes":"name,type"}
-////{"name":"ElementaryTypeNameExpression","attributes":"type,value"}
-////{"name":"ElementaryTypeName","attributes":"name"}
-////{"name":"ContractDefinition","attributes":"fullyImplemented,linearizedBaseContracts,isLibrary,name"}
-////{"name":"ForStatement","attributes":"-----"}
-////{"name":"ArrayTypeName","attributes":"-----"}
-////{"name":"Identifier","attributes":"type,value"}
-////{"name":"Assignment","attributes":"type,operator"}
-////{"name":"Block","attributes":"-----"}
-////{"name":"BinaryOperation","attributes":"type,operator"}
-////{"name":"Throw","attributes":"-----"}
-////{"name":"ExpressionStatement","attributes":"-----"}
-////{"name":"MemberAccess","attributes":"member_name,type"}
-////{"name":"VariableDeclarationStatement","attributes":"-----"}
-////
+//{"name":"FunctionDefinition","attributes":"constant,payable,visibility,name"}
+//{"name":"IfStatement","attributes":"-----"}
+//{"name":"UserDefinedTypeName","attributes":"name"}
+//{"name":"FunctionCall","attributes":"type_conversion,type"}
+//{"name":"IndexAccess","attributes":"type"}
+//{"name":"Literal","attributes":"hexvalue,subdenomination,token,type,value"}
+//{"name":"UnaryOperation","attributes":"prefix,type,operator"}
+//{"name":"Mapping","attributes":"-----"}
+//{"name":"WhileStatement","attributes":"-----"}
+//{"name":"StructDefinition","attributes":"name"}
+//{"name":"ParameterList","attributes":"-----"}
+//{"name":"PragmaDirective","attributes":"literals"}
+//{"name":"VariableDeclaration","attributes":"name,type"}
+//{"name":"ElementaryTypeNameExpression","attributes":"type,value"}
+//{"name":"ElementaryTypeName","attributes":"name"}
+//{"name":"ContractDefinition","attributes":"fullyImplemented,linearizedBaseContracts,isLibrary,name"}
+//{"name":"ForStatement","attributes":"-----"}
+//{"name":"ArrayTypeName","attributes":"-----"}
+//{"name":"Identifier","attributes":"type,value"}
+//{"name":"Assignment","attributes":"type,operator"}
+//{"name":"Block","attributes":"-----"}
+//{"name":"BinaryOperation","attributes":"type,operator"}
+//{"name":"Throw","attributes":"-----"}
+//{"name":"ExpressionStatement","attributes":"-----"}
+//{"name":"MemberAccess","attributes":"member_name,type"}
+//{"name":"VariableDeclarationStatement","attributes":"-----"}
+//
 //   StructDefinition:name->"Voter"
 //   ElementaryTypeName:name->"uint"
 //   VariableDeclaration:name->"weight",type->"uint256"
@@ -904,391 +899,391 @@ contract Token is Foo, Bar {
 //-------- {"ATTR_type":"struct Ballot.Proposal storage ref[] storage ref","srcChars":9,"ATTR_value":"proposals","name":"Identifier","id":265,"srcSt":4809}
 //-------- {"ATTR_type_conversion":"false","ATTR_type":"uint256","srcChars":17,"name":"FunctionCall","id":267,"srcSt":4819}
 //--------- {"ATTR_type":"function () constant returns (uint256)","srcChars":15,"ATTR_value":"winningProposal","name":"Identifier","id":266,"srcSt":4819}
-//  
-//  def xml1 = 
-//    <JSON>
-//      <children>
-//        <src>0:23:-1</src>
-//        <name>PragmaDirective</name>
-//        <attributes>
-//          <literals>solidity</literals>
-//          <literals>^</literals>
-//          <literals>0.4</literals>
-//          <literals>.9</literals>
-//        </attributes>
-//        <id>1</id>
-//      </children>
-//      <children>
-//        <children>
-//          <children>
-//            <src>42:7:-1</src>
-//            <name>ElementaryTypeName</name>
-//            <attributes>
-//              <name>address</name>
-//            </attributes>
-//            <id>2</id>
-//          </children>
-//          <src>42:13:-1</src>
-//          <name>VariableDeclaration</name>
-//          <attributes>
-//            <name>owner</name>
-//            <type>address</type>
-//          </attributes>
-//          <id>3</id>
-//        </children>
-//        <children>
-//          <children>
-//            <src>72:2:-1</src>
-//            <name>ParameterList</name>
-//            <id>4</id>
-//          </children>
-//          <children>
-//            <src>75:0:-1</src>
-//            <name>ParameterList</name>
-//            <id>5</id>
-//          </children>
-//          <children>
-//            <children>
-//              <children>
-//                <children>
-//                  <src>77:5:-1</src>
-//                  <name>Identifier</name>
-//                  <attributes>
-//                    <type>address</type>
-//                    <value>owner</value>
-//                  </attributes>
-//                  <id>6</id>
-//                </children>
-//                <children>
-//                  <children>
-//                    <src>85:3:-1</src>
-//                    <name>Identifier</name>
-//                    <attributes>
-//                      <type>msg</type>
-//                      <value>msg</value>
-//                    </attributes>
-//                    <id>7</id>
-//                  </children>
-//                  <src>85:10:-1</src>
-//                  <name>MemberAccess</name>
-//                  <attributes>
-//                    <member_name>sender</member_name>
-//                    <type>address</type>
-//                  </attributes>
-//                  <id>8</id>
-//                </children>
-//                <src>77:18:-1</src>
-//                <name>Assignment</name>
-//                <attributes>
-//                  <type>address</type>
-//                  <operator>=</operator>
-//                </attributes>
-//                <id>9</id>
-//              </children>
-//              <src>77:18:-1</src>
-//              <name>ExpressionStatement</name>
-//              <id>10</id>
-//            </children>
-//            <src>75:23:-1</src>
-//            <name>Block</name>
-//            <id>11</id>
-//          </children>
-//          <src>57:41:-1</src>
-//          <name>FunctionDefinition</name>
-//          <attributes>
-//            <constant>false</constant>
-//            <payable>false</payable>
-//            <visibility>public</visibility>
-//            <name>mortal</name>
-//          </attributes>
-//          <id>12</id>
-//        </children>
-//        <children>
-//          <children>
-//            <src>112:2:-1</src>
-//            <name>ParameterList</name>
-//            <id>13</id>
-//          </children>
-//          <children>
-//            <src>115:0:-1</src>
-//            <name>ParameterList</name>
-//            <id>14</id>
-//          </children>
-//          <children>
-//            <children>
-//              <children>
-//                <children>
-//                  <children>
-//                    <src>121:3:-1</src>
-//                    <name>Identifier</name>
-//                    <attributes>
-//                      <type>msg</type>
-//                      <value>msg</value>
-//                    </attributes>
-//                    <id>15</id>
-//                  </children>
-//                  <src>121:10:-1</src>
-//                  <name>MemberAccess</name>
-//                  <attributes>
-//                    <member_name>sender</member_name>
-//                    <type>address</type>
-//                  </attributes>
-//                  <id>16</id>
-//                </children>
-//                <children>
-//                  <src>135:5:-1</src>
-//                  <name>Identifier</name>
-//                  <attributes>
-//                    <type>address</type>
-//                    <value>owner</value>
-//                  </attributes>
-//                  <id>17</id>
-//                </children>
-//                <src>121:19:-1</src>
-//                <name>BinaryOperation</name>
-//                <attributes>
-//                  <type>bool</type>
-//                  <operator>==</operator>
-//                </attributes>
-//                <id>18</id>
-//              </children>
-//              <children>
-//                <children>
-//                  <children>
-//                    <src>142:7:-1</src>
-//                    <name>Identifier</name>
-//                    <attributes>
-//                      <type>function (address)</type>
-//                      <value>suicide</value>
-//                    </attributes>
-//                    <id>19</id>
-//                  </children>
-//                  <children>
-//                    <src>150:5:-1</src>
-//                    <name>Identifier</name>
-//                    <attributes>
-//                      <type>address</type>
-//                      <value>owner</value>
-//                    </attributes>
-//                    <id>20</id>
-//                  </children>
-//                  <src>142:14:-1</src>
-//                  <name>FunctionCall</name>
-//                  <attributes>
-//                    <type_conversion>false</type_conversion>
-//                    <type>tuple()</type>
-//                  </attributes>
-//                  <id>21</id>
-//                </children>
-//                <src>142:14:-1</src>
-//                <name>ExpressionStatement</name>
-//                <id>22</id>
-//              </children>
-//              <src>117:39:-1</src>
-//              <name>IfStatement</name>
-//              <id>23</id>
-//            </children>
-//            <src>115:44:-1</src>
-//            <name>Block</name>
-//            <id>24</id>
-//          </children>
-//          <src>99:60:-1</src>
-//          <name>FunctionDefinition</name>
-//          <attributes>
-//            <constant>false</constant>
-//            <payable>false</payable>
-//            <visibility>public</visibility>
-//            <name>kill</name>
-//          </attributes>
-//          <id>25</id>
-//        </children>
-//        <src>24:137:-1</src>
-//        <name>ContractDefinition</name>
-//        <attributes>
-//          <fullyImplemented>true</fullyImplemented>
-//          <linearizedBaseContracts>26</linearizedBaseContracts>
-//          <isLibrary>false</isLibrary>
-//          <name>mortal</name>
-//        </attributes>
-//        <id>26</id>
-//      </children>
-//      <children>
-//        <children>
-//          <children>
-//            <src>182:6:-1</src>
-//            <name>UserDefinedTypeName</name>
-//            <attributes>
-//              <name>mortal</name>
-//            </attributes>
-//            <id>27</id>
-//          </children>
-//          <src>182:6:-1</src>
-//          <name>InheritanceSpecifier</name>
-//          <id>28</id>
-//        </children>
-//        <children>
-//          <children>
-//            <src>191:6:-1</src>
-//            <name>ElementaryTypeName</name>
-//            <attributes>
-//              <name>string</name>
-//            </attributes>
-//            <id>29</id>
-//          </children>
-//          <src>191:15:-1</src>
-//          <name>VariableDeclaration</name>
-//          <attributes>
-//            <name>greeting</name>
-//            <type>string storage ref</type>
-//          </attributes>
-//          <id>30</id>
-//        </children>
-//        <children>
-//          <children>
-//            <children>
-//              <children>
-//                <src>225:6:-1</src>
-//                <name>ElementaryTypeName</name>
-//                <attributes>
-//                  <name>string</name>
-//                </attributes>
-//                <id>31</id>
-//              </children>
-//              <src>225:16:-1</src>
-//              <name>VariableDeclaration</name>
-//              <attributes>
-//                <name>_greeting</name>
-//                <type>string memory</type>
-//              </attributes>
-//              <id>32</id>
-//            </children>
-//            <src>224:18:-1</src>
-//            <name>ParameterList</name>
-//            <id>33</id>
-//          </children>
-//          <children>
-//            <src>250:0:-1</src>
-//            <name>ParameterList</name>
-//            <id>34</id>
-//          </children>
-//          <children>
-//            <children>
-//              <children>
-//                <children>
-//                  <src>252:8:-1</src>
-//                  <name>Identifier</name>
-//                  <attributes>
-//                    <type>string storage ref</type>
-//                    <value>greeting</value>
-//                  </attributes>
-//                  <id>35</id>
-//                </children>
-//                <children>
-//                  <src>263:9:-1</src>
-//                  <name>Identifier</name>
-//                  <attributes>
-//                    <type>string memory</type>
-//                    <value>_greeting</value>
-//                  </attributes>
-//                  <id>36</id>
-//                </children>
-//                <src>252:20:-1</src>
-//                <name>Assignment</name>
-//                <attributes>
-//                  <type>string storage ref</type>
-//                  <operator>=</operator>
-//                </attributes>
-//                <id>37</id>
-//              </children>
-//              <src>252:20:-1</src>
-//              <name>ExpressionStatement</name>
-//              <id>38</id>
-//            </children>
-//            <src>250:25:-1</src>
-//            <name>Block</name>
-//            <id>39</id>
-//          </children>
-//          <src>208:67:-1</src>
-//          <name>FunctionDefinition</name>
-//          <attributes>
-//            <constant>false</constant>
-//            <payable>false</payable>
-//            <visibility>public</visibility>
-//            <name>greeter</name>
-//          </attributes>
-//          <id>40</id>
-//        </children>
-//        <children>
-//          <children>
-//            <src>290:2:-1</src>
-//            <name>ParameterList</name>
-//            <id>41</id>
-//          </children>
-//          <children>
-//            <children>
-//              <children>
-//                <src>311:6:-1</src>
-//                <name>ElementaryTypeName</name>
-//                <attributes>
-//                  <name>string</name>
-//                </attributes>
-//                <id>42</id>
-//              </children>
-//              <src>311:6:-1</src>
-//              <name>VariableDeclaration</name>
-//              <attributes>
-//                <name/>
-//                <type>string memory</type>
-//              </attributes>
-//              <id>43</id>
-//            </children>
-//            <src>310:8:-1</src>
-//            <name>ParameterList</name>
-//            <id>44</id>
-//          </children>
-//          <children>
-//            <children>
-//              <children>
-//                <src>328:8:-1</src>
-//                <name>Identifier</name>
-//                <attributes>
-//                  <type>string storage ref</type>
-//                  <value>greeting</value>
-//                </attributes>
-//                <id>45</id>
-//              </children>
-//              <src>321:15:-1</src>
-//              <name>Return</name>
-//              <id>46</id>
-//            </children>
-//            <src>319:20:-1</src>
-//            <name>Block</name>
-//            <id>47</id>
-//          </children>
-//          <src>276:63:-1</src>
-//          <name>FunctionDefinition</name>
-//          <attributes>
-//            <constant>true</constant>
-//            <payable>false</payable>
-//            <visibility>public</visibility>
-//            <name>greet</name>
-//          </attributes>
-//          <id>48</id>
-//        </children>
-//        <src>162:179:-1</src>
-//        <name>ContractDefinition</name>
-//        <attributes>
-//          <fullyImplemented>true</fullyImplemented>
-//          <linearizedBaseContracts>49</linearizedBaseContracts>
-//          <linearizedBaseContracts>26</linearizedBaseContracts>
-//          <isLibrary>false</isLibrary>
-//          <name>greeter</name>
-//        </attributes>
-//        <id>49</id>
-//      </children>
-//      <name>SourceUnit</name>
-//    </JSON>
-//
-//}
+
+  def xml1 =
+    <JSON>
+      <children>
+        <src>0:23:-1</src>
+        <name>PragmaDirective</name>
+        <attributes>
+          <literals>solidity</literals>
+          <literals>^</literals>
+          <literals>0.4</literals>
+          <literals>.9</literals>
+        </attributes>
+        <id>1</id>
+      </children>
+      <children>
+        <children>
+          <children>
+            <src>42:7:-1</src>
+            <name>ElementaryTypeName</name>
+            <attributes>
+              <name>address</name>
+            </attributes>
+            <id>2</id>
+          </children>
+          <src>42:13:-1</src>
+          <name>VariableDeclaration</name>
+          <attributes>
+            <name>owner</name>
+            <type>address</type>
+          </attributes>
+          <id>3</id>
+        </children>
+        <children>
+          <children>
+            <src>72:2:-1</src>
+            <name>ParameterList</name>
+            <id>4</id>
+          </children>
+          <children>
+            <src>75:0:-1</src>
+            <name>ParameterList</name>
+            <id>5</id>
+          </children>
+          <children>
+            <children>
+              <children>
+                <children>
+                  <src>77:5:-1</src>
+                  <name>Identifier</name>
+                  <attributes>
+                    <type>address</type>
+                    <value>owner</value>
+                  </attributes>
+                  <id>6</id>
+                </children>
+                <children>
+                  <children>
+                    <src>85:3:-1</src>
+                    <name>Identifier</name>
+                    <attributes>
+                      <type>msg</type>
+                      <value>msg</value>
+                    </attributes>
+                    <id>7</id>
+                  </children>
+                  <src>85:10:-1</src>
+                  <name>MemberAccess</name>
+                  <attributes>
+                    <member_name>sender</member_name>
+                    <type>address</type>
+                  </attributes>
+                  <id>8</id>
+                </children>
+                <src>77:18:-1</src>
+                <name>Assignment</name>
+                <attributes>
+                  <type>address</type>
+                  <operator>=</operator>
+                </attributes>
+                <id>9</id>
+              </children>
+              <src>77:18:-1</src>
+              <name>ExpressionStatement</name>
+              <id>10</id>
+            </children>
+            <src>75:23:-1</src>
+            <name>Block</name>
+            <id>11</id>
+          </children>
+          <src>57:41:-1</src>
+          <name>FunctionDefinition</name>
+          <attributes>
+            <constant>false</constant>
+            <payable>false</payable>
+            <visibility>public</visibility>
+            <name>mortal</name>
+          </attributes>
+          <id>12</id>
+        </children>
+        <children>
+          <children>
+            <src>112:2:-1</src>
+            <name>ParameterList</name>
+            <id>13</id>
+          </children>
+          <children>
+            <src>115:0:-1</src>
+            <name>ParameterList</name>
+            <id>14</id>
+          </children>
+          <children>
+            <children>
+              <children>
+                <children>
+                  <children>
+                    <src>121:3:-1</src>
+                    <name>Identifier</name>
+                    <attributes>
+                      <type>msg</type>
+                      <value>msg</value>
+                    </attributes>
+                    <id>15</id>
+                  </children>
+                  <src>121:10:-1</src>
+                  <name>MemberAccess</name>
+                  <attributes>
+                    <member_name>sender</member_name>
+                    <type>address</type>
+                  </attributes>
+                  <id>16</id>
+                </children>
+                <children>
+                  <src>135:5:-1</src>
+                  <name>Identifier</name>
+                  <attributes>
+                    <type>address</type>
+                    <value>owner</value>
+                  </attributes>
+                  <id>17</id>
+                </children>
+                <src>121:19:-1</src>
+                <name>BinaryOperation</name>
+                <attributes>
+                  <type>bool</type>
+                  <operator>==</operator>
+                </attributes>
+                <id>18</id>
+              </children>
+              <children>
+                <children>
+                  <children>
+                    <src>142:7:-1</src>
+                    <name>Identifier</name>
+                    <attributes>
+                      <type>function (address)</type>
+                      <value>suicide</value>
+                    </attributes>
+                    <id>19</id>
+                  </children>
+                  <children>
+                    <src>150:5:-1</src>
+                    <name>Identifier</name>
+                    <attributes>
+                      <type>address</type>
+                      <value>owner</value>
+                    </attributes>
+                    <id>20</id>
+                  </children>
+                  <src>142:14:-1</src>
+                  <name>FunctionCall</name>
+                  <attributes>
+                    <type_conversion>false</type_conversion>
+                    <type>tuple()</type>
+                  </attributes>
+                  <id>21</id>
+                </children>
+                <src>142:14:-1</src>
+                <name>ExpressionStatement</name>
+                <id>22</id>
+              </children>
+              <src>117:39:-1</src>
+              <name>IfStatement</name>
+              <id>23</id>
+            </children>
+            <src>115:44:-1</src>
+            <name>Block</name>
+            <id>24</id>
+          </children>
+          <src>99:60:-1</src>
+          <name>FunctionDefinition</name>
+          <attributes>
+            <constant>false</constant>
+            <payable>false</payable>
+            <visibility>public</visibility>
+            <name>kill</name>
+          </attributes>
+          <id>25</id>
+        </children>
+        <src>24:137:-1</src>
+        <name>ContractDefinition</name>
+        <attributes>
+          <fullyImplemented>true</fullyImplemented>
+          <linearizedBaseContracts>26</linearizedBaseContracts>
+          <isLibrary>false</isLibrary>
+          <name>mortal</name>
+        </attributes>
+        <id>26</id>
+      </children>
+      <children>
+        <children>
+          <children>
+            <src>182:6:-1</src>
+            <name>UserDefinedTypeName</name>
+            <attributes>
+              <name>mortal</name>
+            </attributes>
+            <id>27</id>
+          </children>
+          <src>182:6:-1</src>
+          <name>InheritanceSpecifier</name>
+          <id>28</id>
+        </children>
+        <children>
+          <children>
+            <src>191:6:-1</src>
+            <name>ElementaryTypeName</name>
+            <attributes>
+              <name>string</name>
+            </attributes>
+            <id>29</id>
+          </children>
+          <src>191:15:-1</src>
+          <name>VariableDeclaration</name>
+          <attributes>
+            <name>greeting</name>
+            <type>string storage ref</type>
+          </attributes>
+          <id>30</id>
+        </children>
+        <children>
+          <children>
+            <children>
+              <children>
+                <src>225:6:-1</src>
+                <name>ElementaryTypeName</name>
+                <attributes>
+                  <name>string</name>
+                </attributes>
+                <id>31</id>
+              </children>
+              <src>225:16:-1</src>
+              <name>VariableDeclaration</name>
+              <attributes>
+                <name>_greeting</name>
+                <type>string memory</type>
+              </attributes>
+              <id>32</id>
+            </children>
+            <src>224:18:-1</src>
+            <name>ParameterList</name>
+            <id>33</id>
+          </children>
+          <children>
+            <src>250:0:-1</src>
+            <name>ParameterList</name>
+            <id>34</id>
+          </children>
+          <children>
+            <children>
+              <children>
+                <children>
+                  <src>252:8:-1</src>
+                  <name>Identifier</name>
+                  <attributes>
+                    <type>string storage ref</type>
+                    <value>greeting</value>
+                  </attributes>
+                  <id>35</id>
+                </children>
+                <children>
+                  <src>263:9:-1</src>
+                  <name>Identifier</name>
+                  <attributes>
+                    <type>string memory</type>
+                    <value>_greeting</value>
+                  </attributes>
+                  <id>36</id>
+                </children>
+                <src>252:20:-1</src>
+                <name>Assignment</name>
+                <attributes>
+                  <type>string storage ref</type>
+                  <operator>=</operator>
+                </attributes>
+                <id>37</id>
+              </children>
+              <src>252:20:-1</src>
+              <name>ExpressionStatement</name>
+              <id>38</id>
+            </children>
+            <src>250:25:-1</src>
+            <name>Block</name>
+            <id>39</id>
+          </children>
+          <src>208:67:-1</src>
+          <name>FunctionDefinition</name>
+          <attributes>
+            <constant>false</constant>
+            <payable>false</payable>
+            <visibility>public</visibility>
+            <name>greeter</name>
+          </attributes>
+          <id>40</id>
+        </children>
+        <children>
+          <children>
+            <src>290:2:-1</src>
+            <name>ParameterList</name>
+            <id>41</id>
+          </children>
+          <children>
+            <children>
+              <children>
+                <src>311:6:-1</src>
+                <name>ElementaryTypeName</name>
+                <attributes>
+                  <name>string</name>
+                </attributes>
+                <id>42</id>
+              </children>
+              <src>311:6:-1</src>
+              <name>VariableDeclaration</name>
+              <attributes>
+                <name/>
+                <type>string memory</type>
+              </attributes>
+              <id>43</id>
+            </children>
+            <src>310:8:-1</src>
+            <name>ParameterList</name>
+            <id>44</id>
+          </children>
+          <children>
+            <children>
+              <children>
+                <src>328:8:-1</src>
+                <name>Identifier</name>
+                <attributes>
+                  <type>string storage ref</type>
+                  <value>greeting</value>
+                </attributes>
+                <id>45</id>
+              </children>
+              <src>321:15:-1</src>
+              <name>Return</name>
+              <id>46</id>
+            </children>
+            <src>319:20:-1</src>
+            <name>Block</name>
+            <id>47</id>
+          </children>
+          <src>276:63:-1</src>
+          <name>FunctionDefinition</name>
+          <attributes>
+            <constant>true</constant>
+            <payable>false</payable>
+            <visibility>public</visibility>
+            <name>greet</name>
+          </attributes>
+          <id>48</id>
+        </children>
+        <src>162:179:-1</src>
+        <name>ContractDefinition</name>
+        <attributes>
+          <fullyImplemented>true</fullyImplemented>
+          <linearizedBaseContracts>49</linearizedBaseContracts>
+          <linearizedBaseContracts>26</linearizedBaseContracts>
+          <isLibrary>false</isLibrary>
+          <name>greeter</name>
+        </attributes>
+        <id>49</id>
+      </children>
+      <name>SourceUnit</name>
+    </JSON>
+
+}
 */
 }

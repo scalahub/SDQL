@@ -3,9 +3,6 @@ package sdql
 
 import java.io.{ByteArrayOutputStream, File, PrintStream}
 
-import solidity2datalog.SolidityToDatalog
-import solidity2datalog.sdql.XSolidityLoader
-import solidity2datalog.util.JSONUtil
 import dql.DQLUtil
 import org.sh.db.config.DBConfigFromFile
 import org.sh.easyweb.Text
@@ -14,9 +11,11 @@ import sdql.util.AnalyzerUtil._
 import sdql.util.BugPattern
 import sdql.util.FileUtil._
 import sdql.util.SDQLUtil._
+import solidity2datalog.SolidityToDatalog
+import solidity2datalog.sdql.XSolidityLoader
+import solidity2datalog.util.JSONUtil
 import trap.file.Util._
 
-import scala.collection.JavaConverters._
 import scala.util.Random._
 
 object Compiler {
@@ -35,9 +34,6 @@ find #ContractDefinition
     DQLUtil.compileDQL(sdqlCode.getText) // check for errors first        
     "Compilation successful"
   }
-  //  def compileSDQLFile(sdqlFile:File) = {
-  //    compileSDQLCode(new Text(readTextFileToString(sdqlFile.getAbsolutePath)))
-  //  }
 
   def compileSolidityCode(solidityCode:Text, printTree:Boolean) = {
     val $info$ = "If printTree is true then it will output AST, else it will output Datalog facts"
@@ -67,11 +63,8 @@ contract SimpleStorage {
       } else compileSolidityFile(new File(tempFile))
     }
   }
-  //  def compileSolidityFile(solidityFile:File) = {
-  //    SolidityToXSolidity.getXML(solidityFile.getAbsolutePath)   
-  //    "Compilation successful"
-  //  }
 }
+
 import org.sh.db.ScalaDB._
 import org.sh.db.core.DataStructures._
 import org.sh.db.{DBManager => DB}
@@ -79,14 +72,14 @@ object AnalyzerMultiTenantUtil {
   val STR = VARCHAR(255)
   val userIDCol = Col("userID", STR)
   val timeCol = Col("time", ULONG)
-  
+
   implicit val config = new DBConfigFromFile("sdql.properties")
   val patternIDCol = Col("patternID", STR)
-  
+
   val userDB = DB("users")(userIDCol, timeCol)(userIDCol)
-  
+
   val userPatternsDB = DB("userPatterns")(userIDCol, patternIDCol)(userIDCol, patternIDCol)
-  
+
   def userGetBugPatterns(userID:String) = {
     userPatternsDB.select(patternIDCol).where(userIDCol === userID).firstAsT[String]
   }
@@ -95,10 +88,10 @@ object AnalyzerMultiTenantUtil {
     m.foreach{
       case (patternID, list) => if (list.size > 1) throw new Exception(s"Duplicate patternID $patternID")
     }
-    val toAdd = patternIDs.map {patternID => 
+    val toAdd = patternIDs.map {patternID =>
       getAllBugPatterns.find(_.id == patternID) match {
-        case Some(pattern) => pattern        
-        case _ => throw new Exception(s"No such patternID $patternID") 
+        case Some(pattern) => pattern
+        case _ => throw new Exception(s"No such patternID $patternID")
       }
     }
     val time = getTime
@@ -116,23 +109,23 @@ object AnalyzerMultiTenantUtil {
 object AnalyzerMultiTenant {
   import AnalyzerMultiTenantUtil._
   def userCreate(userID:String) = if (userDB.exists(userIDCol === userID)) throw new Exception(s"User exists $userID") else {
-    userDB.insert(userID, getTime)    
+    userDB.insert(userID, getTime)
     userAddAllBugPatterns(userID)
   }
   def userDeleteBugPattern(userID:String, patternID:String) = {
     if (userPatternsDB.exists(userIDCol === userID, patternIDCol === patternID)) {
       userPatternsDB.deleteWhere(userIDCol === userID, patternIDCol === patternID)
-    } else throw new Exception(s"No such userID-patternID pair ($userID, $patternID)") 
+    } else throw new Exception(s"No such userID-patternID pair ($userID, $patternID)")
   }
-  
+
   def userGetBugPatterns(userID:String) = { // outputs JSON
     val p = AnalyzerMultiTenantUtil.userGetBugPatterns(userID)
     JSONUtil.createJSONObject(
-      Array("userID", "numPatterns", "patterns"), 
+      Array("userID", "numPatterns", "patterns"),
       Array(userID, p.size, JSONUtil.encodeJSONSeq(p))
     )
   }
-  
+
   def userDoAnalysis(userID:String, solidityCode:Text) = {
     val $info$ = "Replace below sample code with your own. The sample code contains the bugs we are catching"
     val tempSolidityFile = tmpDir+"/"+nextInt.abs+".sol"
@@ -145,7 +138,7 @@ object AnalyzerMultiTenant {
     val sdqlCode = (Seq("patterns sdql") ++ sdql).reduceLeft(_+"\n"+_)
     doAnalysisRealtimeJSON(sdqlCode, new File(tempSolidityFile))
   }
-  
+
 }
 
 object Analyzer {
@@ -162,7 +155,7 @@ object Analyzer {
 find #Flow:firstSrc where {@src = #Invoke}"""
     
     val id = "Bug-"+(getAllBugPatterns.size+1)
-    val newCode = sdql.getText.lines.iterator().asScala.toSeq
+    val newCode = sdql.getText.lines.toSeq
     val newPattern = BugPattern(id, name, description, newCode, level)
     val header = "patterns sdql"
     val olderCode = getAllBugPatterns.flatMap(_.sdql).filterNot{_.startsWith("find")}
@@ -265,12 +258,8 @@ object AnalyzerBackend {
       if (a.active) a.sdql else a.sdql.filterNot(_.startsWith("find"))
     }
     
-//    sdql foreach println
-    // val sdqlCode = (Seq("patterns sdql") ++ getActiveBugPatterns.flatMap(_.sdql)).reduceLeft(_+"\n"+_)
     val sdqlCode = (Seq("patterns sdql") ++ sdql).reduceLeft(_+"\n"+_)
-    //println(s"sdqlCode:---->\n $sdqlCode\n---->")
     doAnalysisRealtimeJSON(sdqlCode, new File(tempSolidityFile))
-    //doAnalysisRealtimeStr(sdqlCode, new File(tempSolidityFile))
   }
   def setActiveBugPatterns(activeStr:String) = setActiveBugs(activeStr)
   
@@ -286,50 +275,11 @@ object AnalyzerBackend {
       Array("numProblems", "problems"), 
       Array(getAllBugPatterns.size, JSONUtil.encodeJSONSeq(problems))
     )
-    /*
-{“numProblems”:”3”, “problems”:[{“name”:”use of multiple sends”, “description”:”some description”, “level”:2”}, {“name”:”problem 2”, “description”:”some description 2”, “level”:3”}, {“name”:”problem 3”, “description”:”some description 3”, “level”:1”}]}     */
+/* // Sample response
+{“numProblems”:”3”, “problems”:[{“name”:”use of multiple sends”, “description”:”some description”, “level”:2”}, {“name”:”problem 2”, “description”:”some description 2”, “level”:3”}, {“name”:”problem 3”, “description”:”some description 3”, “level”:1”}]}
+*/
   }
 }
-/* object AnalyzerRealTime {
-  def doAnalysis(sdqlCode:Text, solidityCode:Text) = {
-    val $info$ = "replace below codes with your own"
-    val $sdqlCode$ = """
-// replace with your SDQL code
-    
-patterns solidity
-find #ContractDefinition
-"""
-    val $solidityCode$ = """
-// replace with your solidity code
-// this is used to understand how the tool constructs its internal tree
-pragma solidity ^0.4.0;
-    
-contract SimpleStorage {
-    uint storedData; // State variable
-}"""
-    val tempSolidityFile = tmpDir+"/"+nextInt.abs+".sol"
-    writeToTextFile(tempSolidityFile, solidityCode.getText)
-    doAnalysisRealtime(sdqlCode, new File(tempSolidityFile))
-  }
-} */
-/* 
-object AnalyzerTempDir {
-  def getTmpDir = DQLUtil.dqlDir
-  def clearTempDirs(password:String) = {
-    if (password == "0925-924-5924-5092-59134239") {
-      deleteRecursive(new File(systemTmp))
-      org.sh.utils.file.Util.createDir(systemTmp)
-      org.sh.utils.file.Util.createDir(tmpDir)
-      org.sh.utils.file.Util.createDir(FileStore.uploadDir)
-    } else throw new Exception("Invalid password.")
-  }
-  def getAllTmpDirs(password:String) = {
-    if (password == "0925-924-5924-5092-59134239") {
-      getSubDirs(new File(systemTmp))
-    } else throw new Exception("Invalid password.")
-  }
-}
- */
 object Config {
   def getBasis:Array[String] = {
     val $info$ = "In the output [T] indicates that pattern is traversible (i.e., returns primary keys)"
@@ -351,7 +301,7 @@ object Config {
     ps.println(s" ======= EXTENDED BASIS ($rightSize facts) =======")
     ps.println
     right.foreach{l => ps.println(l.signature)}
-    baos.toString.lines.iterator().asScala.toArray; // e.g. ISO-8859-1
+    baos.toString.lines.toArray; // e.g. ISO-8859-1
   }  
   def getRules = {
     val ruleFilter = DQLUtil.optRuleFilter.getOrElse(throw new Exception("No rules defined"))

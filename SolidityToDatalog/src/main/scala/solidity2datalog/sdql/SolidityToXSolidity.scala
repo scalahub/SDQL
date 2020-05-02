@@ -18,7 +18,7 @@ object SolidityToXSolidity {
     // val (code, out, err) = runCommand(Seq("solc", "--combined-json", "metadata", solFile))
     if (code == 0){
       val lines = out.lines 
-      val json = lines.iterator().asScala.filterNot(line => line.startsWith("=======") || line.startsWith("JSON AST:")).mkString
+      val json = lines.filterNot(line => line.startsWith("=======") || line.startsWith("JSON AST:")).mkString
       solidity2datalog.util.JSONUtil.jsonStringToXML(json)
     } else throw new Exception(err)
   }  
@@ -31,7 +31,7 @@ object SolidityToXSolidity {
     
     if (err == "") {
       val lines = out.lines 
-      val json = lines.iterator().asScala.filterNot(line => line.startsWith("=======") || line.startsWith("JSON AST:")).mkString
+      val json = lines.filterNot(line => line.startsWith("=======") || line.startsWith("JSON AST:")).mkString
       solidity2datalog.util.JSONUtil.jsonStringToXML(json)
     } else throw new Exception(err)
       
