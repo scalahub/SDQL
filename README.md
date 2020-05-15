@@ -9,7 +9,7 @@ DQL is short for *Datalog Query Language*, and details can be found on the above
 
 In order to use DQL for Solidity, we need to do the following:
 
-1. Define the DQL basis (i.e., schema of the underlying fact tables). This is defined [here](https://github.com/scalahub/SDQL/blob/master/rules.txt).
+1. Define the DQL basis (i.e., schema of the underlying fact tables). This is defined [here](https://github.com/scalahub/SDQL/blob/master/basis.txt).
 2. Define the DQL rules for generating extended basis from reduces basis, as defined [here](https://github.com/scalahub/SDQL/blob/master/rules.txt) 
 3. Populate the (reduced-basis) tables by converting a Solidity program to Datalog facts. This involves two steps
     * Convert the Solidity to an intermediate XML based language called XSolidity (done [here](https://github.com/scalahub/SDQL/blob/master/SolidityToDatalog/src/main/scala/solidity2datalog/sdql/SolidityToXSolidity.scala))
